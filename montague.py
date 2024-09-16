@@ -6,8 +6,11 @@ from uuid import uuid4
 
 def main():
     print( "Executing montague" )
-    p1 = tobj.Proposition( "This is also a proposition." )
-    print( p1.getUuid(), ":", p1.getProp() )
+    p1 = tobj.Proposition()
+    p2 = tobj.Proposition( "This is also a proposition." )
+    print( p1.toString() )
+    print( p2.toString() )
+
 
 
 # if this module is called first, call the main function
