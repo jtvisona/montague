@@ -1,6 +1,7 @@
 """
 This software is to handle formal systems.
 """
+
 import text_objects as tobj
 import function_objects as fobj
 
@@ -9,8 +10,10 @@ def main():
 
     p1 = tobj.Proposition()
     p2 = tobj.Proposition( "This is also a proposition." )
+    p3 = tobj.Proposition( "is(Socrates,mortal)", "predcalc" )
     print( p1.toString() )
     print( p2.toString() )
+    print( p3.toString() )
 
     f1 = fobj.Process( "Test Process",
         { "first_arg": [ "number", "first_body" ],
