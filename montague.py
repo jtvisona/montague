@@ -28,7 +28,8 @@ def main():
     print( OM.get_size() )
     OM.pop_object( prop2 )
     print( OM.object_list )
-    
+    OM.create_obj( exec_command )
+    print( OM.list_keys() )
 
     # --------------------------------
     # objects_function

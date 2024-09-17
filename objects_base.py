@@ -93,6 +93,7 @@ class ObjectManager:
     def get_size( self ):
         return len( self.__object_dict )
     
+    """ EXPERIMENTAL
     def create_obj( self, obj_cmd ):
-        command = f"{obj_cmd}"
-        exec( command )
+        exec( obj_cmd )
+    """
