@@ -46,19 +46,20 @@ class Object:
             f"type={self.__type} " \
             f"name={self.__delim}{self.__name}{self.__delim} "
     
-    @dataclass
-    class ObjectManager:
-        __objectList : dict = field( default_factory=dict )
+@dataclass
+   
+class ObjectManager:
+    __objectList : dict = field( default_factory=dict )
 
-        def __init__():
-            print( "Creating ObjectManager" )
+    def __init__():
+        print( "Creating ObjectManager" )
 
-        def addObject( self, uuid: str, obj: object ):
-            self.__objectList[ uuid ] = obj
-        
-        @property
-        def all( self ):
-            return self.__objectList
+    def addObject( self, obj ):
+        self.__objectList[ obj.uuid ] = obj
+    
+    @property
+    def all( self ):
+        return self.__objectList
 
         
 

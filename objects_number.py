@@ -1,8 +1,8 @@
 from dataclasses import dataclass, field
-from uuid import uuid4
+from objects_base import Object
 
 @dataclass
-class Set:
+class Set( Object ):
     __uuid : str = ""
     ##__type another way to indicate type of class?
     __name : str = "default Set"

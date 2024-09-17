@@ -13,9 +13,15 @@ import objects_logic as lobj
 def main():
     print( "Executing Montague" )
 
-    OM = bobj.
+    OM = bobj.ObjectManager
     prop1 = tobj.Proposition( "This is also a proposition." )
+    print( type(prop1) )
+    #OM.addObject( prop1 )
+
     prop2 = tobj.Proposition( "is(Socrates,mortal)", "predcalc" )
+    #OM.addObject( prop2 )
+    print( OM.all )
+
     print( prop1.toString() )
     print( prop2.toString() )
 

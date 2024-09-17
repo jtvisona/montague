@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from uuid import uuid4
+from objects_base import Object
 
 @dataclass
 class Process:
