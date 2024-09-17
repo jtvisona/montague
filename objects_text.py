@@ -7,7 +7,7 @@ class Proposition( Object ):
     __lang : str = "english"
 
     def __init__ ( self, prop = "", lang = "" ):
-        Object.__init__( "test" )
+        super().__init__( "test" )
 
         if not prop == "":
             self.__prop = prop
@@ -22,7 +22,7 @@ class Proposition( Object ):
         self.__prop = prop
 
     def toString( self ): # Cannot put ANYTHING after backslash in these explict continuations
-        baseString = Object.toString()
+        baseString = super().toString()
         return f"{baseString} " \
-            f"prop={self.__str_delim}{self.__prop}{self.__str_delim} " \
+        f"prop={super().delim}{self.__prop}{super().delim} " \
             f"lang={self.__lang}"

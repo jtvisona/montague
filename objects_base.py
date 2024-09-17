@@ -6,7 +6,7 @@ class Object:
     __uuid : str = ""
     __type : str = ""
     __name : str = ""
-    __str_delim : str = "`"
+    __delim : str = "`"
 
     def __init__ ( self, name = "" ):
         self.__uuid = uuid4()
@@ -36,13 +36,13 @@ class Object:
 
     @property
     def delim( self ):
-        return self.__str_delim
+        return self.__delim
     @delim.setter
     def delim( self, delim ):
-        self.__str_delim = delim
+        self.__delim = delim
 
     def toString( self ):
         return f"uuid={self.__uuid} " \
             f"type={self.__type} " \
-            f"name={self.__str_delim}{self.__name}{self.__str_delim} "
+            f"name={self.__delim}{self.__name}{self.__delim} "
     

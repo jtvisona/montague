@@ -12,12 +12,10 @@ import objects_base as bobj
 def main():
     print( "Executing Montague" )
 
-    prop1 = tobj.Proposition()
-    prop2 = tobj.Proposition( "This is also a proposition." )
-    prop3 = tobj.Proposition( "is(Socrates,mortal)", "predcalc" )
+    prop1 = tobj.Proposition( "This is also a proposition." )
+    prop2 = tobj.Proposition( "is(Socrates,mortal)", "predcalc" )
     print( prop1.toString() )
     print( prop2.toString() )
-    print( prop3.toString() )
 
     proc1 = fobj.Process( "Test Process",
         { "first_arg": [ "number", "first_body" ],
