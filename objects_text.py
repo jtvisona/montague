@@ -27,5 +27,5 @@ class Proposition:
 
     def toString( self ): # Cannot put ANYTHING after backslash in these explict continuations
         return f"uuid={self.__uuid} " \
-            f"prop={self.__str_delim}{self.__prop}`{self.__str_delim} " \
+            f"prop={self.__str_delim}{self.__prop}{self.__str_delim} " \
             f"lang={self.__lang}"
