@@ -7,8 +7,7 @@ class Proposition( Object ):
     __lang : str = "english"
 
     def __init__ ( self, prop = "", lang = "" ):
-        super().__init__( "test" )
-
+        super().__init__()
         if not prop == "":
             self.__prop = prop
         if not lang == "":

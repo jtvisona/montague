@@ -2,35 +2,33 @@ from dataclasses import dataclass, field
 from objects_base import Object
 
 @dataclass
-class Process:
-    __uuid : str = ""
-    __name : str = "default process"
-    __args : dict = field( default_factory=dict ) ## Note the use of a field
-    __str_delim : str = "`"
+class Process( Object ):
+    __args : dict = field( default_factory=dict )
+    __body : str = ""
 
-    def __init__ ( self, name = "", args = {} ):
-        self.__uuid == self.setUuid()
-        if not name == "":
-            self.__name = name
-            self.__args = args
+    def __init__ ( self, name = "", args = {}, body = "" ):
+        super().__init__( name )
+        self.__args = args
+        self.__body = body
 
-    def getUuid( self ):
-        return self.__uuid
-    def setUuid( self ):
-        self.__uuid = uuid4()
-
-    def getName( self ):
-        return self.__name
-    def setName( self, name ):
-        self.__name = name
-
-    def getArgs( self ):
+    @property
+    def args( self ):
         return self.__args
-    def setArgs( self, args ):
+    @args.setter
+    def args( self, args ):
         self.__args = args
 
+    def toPython( self ):
+        args_expr = ""
+        for each_arg in self.args.keys():
+            args_expr += each_arg + ", "
+        args_expr = args_expr[ 0 : len(args_expr)-2 ] # Get rid of last comma and space
+        python_expr = f"def {self.name}( {args_expr} ):\n" \
+            f"\t{self.__body}"
+        return python_expr
+    
     def toString( self ):
-        return f"uuid={self.__uuid} " \
-            f"name={self.__str_delim}{self.__name}{self.__str_delim} " \
-            f"args={self.__args} "
+        baseString = super().toString()
+        return f"{baseString} " \
+            f"args={self.__args}"
     

@@ -4,7 +4,7 @@ This software is to handle formal systems.
 
 import objects_base as bobj
 import objects_text as tobj
-#import objects_function as fobj
+import objects_function as fobj
 #import objects_number as nobj
 #import objects_logic as lobj
 
@@ -15,7 +15,7 @@ def main():
     # --------------------------------
     # objects_text
     # --------------------------------
-
+    """
     prop1 = tobj.Proposition( "This is also a proposition." )
     prop2 = tobj.Proposition( "is(Socrates,mortal)", "predcalc" )
     prop1.regen_uuid()
@@ -30,18 +30,23 @@ def main():
     print( OM.object_list )
     OM.create_obj( exec_command )
     print( OM.list_keys() )
-
+    """
+    
     # --------------------------------
     # objects_function
     # --------------------------------
 
-    """
-    proc1 = fobj.Process( "Test Process",
-        { "first_arg": [ "number", "first_body" ],
-            "second_arg" : [ "proposition" , "second_body" ],
-            "third_arg" : [ "set", "third_body" ] } )
-    print( proc1.toString() )
-    """
+    #"""
+    proc1 = fobj.Process( "function_call",
+        { "first_arg": { "number" },
+            "second_arg" : { "proposition" },
+            "third_arg" : { "set" }
+        },
+        "DO SOME STUFF"
+    )
+    #print( proc1.toString() )
+    print( proc1.toPython() )
+    #"""
 
     # --------------------------------
     # objects_data_structure
