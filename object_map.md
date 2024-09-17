@@ -1,5 +1,8 @@
 	- [ ] Write routine to automate this
 	- [ ] Write routines to build templates
+	- [ ] Use basic python logging found at https://docs.python.org/3/howto/logging.html#logging-basic-tutorial
+	- [ ] Learn about python virtual environment
+	- [ ] Learn about Pydoc
 
 objects_base.py
 	@dataclass Object

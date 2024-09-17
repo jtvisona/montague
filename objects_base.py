@@ -1,5 +1,14 @@
 from dataclasses import dataclass, field
+import utility as U
 from uuid import uuid4
+
+# ----------------------------------------------------------------
+# OBJECT
+# ----------------------------------------------------------------
+
+"""
+Base class for all objects contained in the montague application.
+"""
 
 @dataclass
 class Object:
@@ -9,7 +18,7 @@ class Object:
     __delim : str = "`"
 
     def __init__ ( self, name = "" ):
-        self.__uuid = uuid4()
+        self.__uuid = uuid4() # returns UUID obj and not string; to convert str(self.__uuid)
         self.__type = type( self )
         if not name == "":
             self.__name = name
@@ -20,7 +29,9 @@ class Object:
     @uuid.setter
     def uuid( self, uuid ):
         self.__uuid = uuid
-    def genUuid( self ):
+    def get_uuid_str( self ):
+        return str( self.__uuid )
+    def regen_uuid( self ):
         self.__uuid = uuid4()
 
     @property
@@ -45,22 +56,43 @@ class Object:
         return f"uuid={self.__uuid} " \
             f"type={self.__type} " \
             f"name={self.__delim}{self.__name}{self.__delim} "
-    
+
+# ----------------------------------------------------------------
+# OBJECTMANAGER
+# ----------------------------------------------------------------
+
+"""
+Keeps track of metadata about all objects that have been instanticated
+"""
+
 @dataclass
-   
 class ObjectManager:
-    __objectList : dict = field( default_factory=dict )
+    __object_dict : dict = field( default_factory=dict )
 
-    def __init__():
+    def __init__( self ): # NEED TO INCLUDE SELF HERE OR CAUSES DOWNSTREAM PROBLEMS
         print( "Creating ObjectManager" )
+        self.__object_dict = {}
 
-    def addObject( self, obj ):
-        self.__objectList[ obj.uuid ] = obj
-    
     @property
-    def all( self ):
-        return self.__objectList
+    def object_list( self ):
+        return self.__object_dict
 
+    def add_object( self, obj ):
+        #self.__object_dict[ U.get_substring( obj.uuid, "'", "'" ) ] = obj
+        self.__object_dict[ str( obj.uuid ) ] = obj
+
+    def pop_object( self, obj ):
+        return self.__object_dict.pop( obj.get_uuid_str() )
+
+    def list_keys( self ):
+        return list( self.__object_dict.keys() )
         
-
+    def get_val_by_key( self, key ):
+        return self.__object_dict.get( key )
     
+    def get_size( self ):
+        return len( self.__object_dict )
+    
+    def create_obj( self, obj_cmd ):
+        command = f"{obj_cmd}"
+        exec( command )
