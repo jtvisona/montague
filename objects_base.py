@@ -9,7 +9,7 @@ class Object:
     __str_delim : str = "`"
 
     def __init__ ( self, name = "" ):
-        self.__uuid = self.genUuid()
+        self.__uuid = uuid4()
         self.__type = type( self )
         if not name == "":
             self.__name = name

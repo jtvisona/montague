@@ -1,31 +1,28 @@
 from dataclasses import dataclass
-from uuid import uuid4
+from objects_base import Object
 
 @dataclass
-class Proposition:
-    __uuid : str = ""
+class Proposition( Object ):
     __prop : str = "There is no assigned proposition."
     __lang : str = "english"
-    __str_delim : str = "`"
 
     def __init__ ( self, prop = "", lang = "" ):
-        self.__uuid == self.setUuid()
+        Object.__init__( "test" )
+
         if not prop == "":
             self.__prop = prop
         if not lang == "":
             self.__lang = lang
 
-    def getUuid( self ):
-        return self.__uuid
-    def setUuid( self ):
-        self.__uuid = uuid4()
-
-    def getProp( self ):
+    @property
+    def prop( self ):
         return self.__prop
-    def setProp( self, prop ):
+    @prop.setter
+    def prop( self, prop ):
         self.__prop = prop
 
     def toString( self ): # Cannot put ANYTHING after backslash in these explict continuations
-        return f"uuid={self.__uuid} " \
+        baseString = Object.toString()
+        return f"{baseString} " \
             f"prop={self.__str_delim}{self.__prop}{self.__str_delim} " \
             f"lang={self.__lang}"

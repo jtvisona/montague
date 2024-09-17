@@ -11,7 +11,7 @@ import objects_base as bobj
 
 def main():
     print( "Executing Montague" )
-    """
+
     prop1 = tobj.Proposition()
     prop2 = tobj.Proposition( "This is also a proposition." )
     prop3 = tobj.Proposition( "is(Socrates,mortal)", "predcalc" )
@@ -31,14 +31,6 @@ def main():
     var1 = lobj.Variable( "x", "length" )
     var1.setVal( set1 )
     print( var1.toString() )
-    """
-
-    tmp_obj = bobj.Object()
-    tmp_obj.name = "name_test"
-    print( tmp_obj.name )
-    tmp_obj.uuid = "uuid_test"
-    print( tmp_obj.uuid )
-    print( tmp_obj.toString() )
 
 # if this module is called first, call the main function
 if __name__ == "__main__":
