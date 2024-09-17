@@ -11,7 +11,7 @@ class Process:
     def __init__ ( self, name = "", args = {} ):
         self.__uuid == self.setUuid()
         if not name == "":
-            self.__prop = name
+            self.__name = name
             self.__args = args
 
     def getUuid( self ):
