@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from uuid import uuid4
 
 @dataclass
@@ -45,4 +45,21 @@ class Object:
         return f"uuid={self.__uuid} " \
             f"type={self.__type} " \
             f"name={self.__delim}{self.__name}{self.__delim} "
+    
+    @dataclass
+    class ObjectManager:
+        __objectList : dict = field( default_factory=dict )
+
+        def __init__():
+            print( "Creating ObjectManager" )
+
+        def addObject( self, uuid: str, obj: object ):
+            self.__objectList[ uuid ] = obj
+        
+        @property
+        def all( self ):
+            return self.__objectList
+
+        
+
     

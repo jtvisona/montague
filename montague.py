@@ -2,16 +2,18 @@
 This software is to handle formal systems.
 """
 
+import objects_base as bobj
 import objects_text as tobj
 import objects_function as fobj
 import objects_number as nobj
 import objects_logic as lobj
 
-import objects_base as bobj
+
 
 def main():
     print( "Executing Montague" )
 
+    OM = bobj.
     prop1 = tobj.Proposition( "This is also a proposition." )
     prop2 = tobj.Proposition( "is(Socrates,mortal)", "predcalc" )
     print( prop1.toString() )
