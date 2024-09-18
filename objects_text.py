@@ -23,7 +23,7 @@ class Memo( Object ):
     def to_stringified_lines( self ):
         stringified_lines = ""
         for each_line in self.__lines:
-            stringified_lines += each_line
+            stringified_lines += each_line + "\n"
         return stringified_lines
 
     def to_stringified_list( self ):

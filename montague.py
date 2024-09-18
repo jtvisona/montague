@@ -66,14 +66,16 @@ def main():
     # objects_text
     # --------------------------------
 
-    lines = [ "This is a test of the EBS.\n", \
-        "This is only a test.\n",
-        "If this were a real emergency...\n" ]
+    #"""
+    # Memo example
+    lines = [ "This is a test of the EBS.", \
+        "This is only a test.",
+        "If this were a real emergency..." ]
     memo1 = TEXT.Memo( "test", lines )
     #print( memo1.to_string() )
     #print( memo1.to_stringified_list() )
-    print( memo1.to_stringified_lines() )
-    
+    print( memo1.to_stringified_lines(), end="" )
+    #"""
 
     """
     # Argument example
