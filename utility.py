@@ -24,11 +24,18 @@ dquote = lambda s: f'"{s}"'
 bracket = lambda s: f"[{s}]"
 brace = lambda s: f"[{s}]"
 backtick = lambda s: f"`{s}`"
-stop = lambda s: f"{s}."
+
 sandwich_with = lambda s, delim: f"{delim}{s}{delim}"
+
+stop = lambda s: f"{s}."
+bang = lambda s: f"{s}!"
+huh = lambda s: f"{s}?"
+thus = lambda s: f"{s};"
+drop = lambda s: f"{s[0:len(s)-1]}"
+
 capitalize = lambda s: f"{s[0].upper()}{s[1:len(s)]}"
 cap_and_stop = lambda s: f"{s[0].upper()}{s[1:len(s)]}."
 cap_and_bang = lambda s: f"{s[0].upper()}{s[1:len(s)]}!"
 cap_and_huh = lambda s: f"{s[0].upper()}{s[1:len(s)]}?"
-cap_and_also = lambda s: f"{s[0].upper()}{s[1:len(s)]};"
+cap_and_thus = lambda s: f"{s[0].upper()}{s[1:len(s)]};"
 uncap_and_drop = lambda s: f"{s[0].lower()}{s[1:len(s)-1]}"

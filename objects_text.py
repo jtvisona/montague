@@ -109,16 +109,15 @@ class Memo( Object ):
         f"lines={super().delim}{self.__lines}{super().delim} " \
             f"lang={self.__lang}"
 
-
 @dataclass
 class Proposition( Object ):
-    __value: str = ""
-    __lang: str = ""
+    __value: Sentence = ""
+    __truth_cond: bool = ""
 
-    def __init__ ( self, name: str = "", value: str = "", lang: str = "english" ):
+    def __init__ ( self, name: str = "", value: Sentence = "", truth_cond: bool = "" ):
         super().__init__( name )
         self.__value = value
-        self.__lang = lang
+        self.__truth_cond = truth_cond
 
     @property
     def value( self ):
@@ -127,7 +126,22 @@ class Proposition( Object ):
     def value( self, value: str ):
         self.__value = value
 
-    def to_string( self ): # Cannot put ANYTHING after backslash in these explict continuations
+    @property
+    def truth_cond( self ):
+        return self.__truth_cond
+    @truth_cond.setter
+    def truth_cond( self, truth_cond: bool ):
+        self.__truth_cond = truth_cond
+
+    def stringify_sentence( self ):
+        sentence = self.__value
+        return sentence.value
+
+    def stringify_appraised_truth_cond( self ):
+        sentence = self.__value
+        return f"{U.squote(U.drop(sentence.value))} is {str(self.__truth_cond).lower()}."
+
+    def to_string( self ):
         base_string = super().to_string()
         return f"{base_string} " \
         f"val={super().delim}{self.__value}{super().delim} " \

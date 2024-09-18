@@ -9,8 +9,6 @@ import objects_function as FUN
 import objects_logic as LOGIC
 import objects_text as TXT
 
-#import objects_logic as LOGIC
-
 def main():
     print(  "executing Montague" )
     obj_man = BASE.ObjectManager()
@@ -68,7 +66,15 @@ def main():
     # objects_text
     # --------------------------------
 
+    """
+    # Phrase and Sentence examples
+    sen1 = TXT.Sentence( "first", "the big house is nearby", "decl" )
+    print( str(sen1.uuid) )
+    sen1.regen_uuid()
+    print( str(sen1.uuid) )
     #"""
+
+    """
     # Phrase and Sentence examples
     sen1 = TXT.Sentence( "first", "the big house is nearby", "decl" )
     print( sen1.value )
@@ -76,9 +82,8 @@ def main():
     print( sen1.value )
     sen1.to_uncap_and_drop()
     print( sen1.value )
-
     #"""
-
+    
     """
     # Memo example
     lines = [ "This is a test of the EBS.", \
@@ -102,12 +107,21 @@ def main():
     #"""
 
     """
+    # Proposition example
+    sen1 = TXT.Sentence( "example", "Die Gedanken Sind Frei.", "german")
+    prop1 = TXT.Proposition( "P", sen1, True )
+    print( prop1.stringify_appraised_truth_cond() )
+    #"""
+
+    """
     # Expand examples
-    prop1 = TXT.Proposition( "P1", "All men are mortal.", "english" )
-    prop2 = TXT.Proposition( "P2", "Socrates is a man.", "english" )
-    #prop1.regen_uuid()
-    #print( prop1.to_string() )
-    #print( prop2.to_string() )
+    sen1 = TXT.Proposition( "S1", "All men are mortal." )
+    sen2 = TXT.Proposition( "S2", "Socrates is a man." )
+    prop1 = TXT.Proposition( "P1", sen1 )
+    prop2 = TXT.Proposition( "P2", sen2 )
+    
+    print( prop1.stringify_sentence() )
+    print( prop2.stringify_sentence() )
     # print( obj_man.list_keys() )
     #print( obj_man.get_val_by_key( prop2.get_uuid_str() ) )
     #print( obj_man.get_size() )
