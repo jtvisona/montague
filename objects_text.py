@@ -21,7 +21,7 @@ class Proposition( Object ):
         self.__prop = prop
 
     def toString( self ): # Cannot put ANYTHING after backslash in these explict continuations
-        baseString = super().toString()
-        return f"{baseString} " \
+        base_string = super().toString()
+        return f"{base_string} " \
         f"prop={super().delim}{self.__prop}{super().delim} " \
             f"lang={self.__lang}"

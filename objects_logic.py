@@ -3,41 +3,40 @@ from objects_base import Object
 
 @dataclass
 class Variable:
-    __uuid : str = ""
-    __symbol : str = ""
-    __name : str = "default variable"
-    __val : object = field( default_factory=object )
-    __str_delim : str = "`"
+    __symb : str = ""
+    __type : str = ""
+    __value : object = field( default_factory=object )
 
-    def __init__ ( self, symbol = "", name = "" ):
-        self.__uuid == self.setUuid()
-        if not symbol == "":
-            self.__symbol = symbol
-        if not name == "":
-            self.__name = name
+    def __init__ ( self, name = "", symb = "", type = "" ):
+        super().__init__( name )
+        if not symb == "":
+            self.__symb = symb
+        if not type == "":
+            self.__type = type
 
-    def getUuid( self ):
-        return self.__uuid
-    def setUuid( self ):
-        self.__uuid = uuid4()
+    @property
+    def symb( self ):
+        return self.__sym
+    @symb.setter
+    def symb( self, __sym ):
+        self.__sym = __sym
 
-    def getSymbol( self ):
-        return self.__symbol
-    def setsymbol( self, __symbol ):
-        self.__symbol = __symbol
+    @property
+    def value( self ):
+        return self.__value
+    @value.setter
+    def value( self, __value ):
+        self.__value = __value
 
-    def getVal( self ):
-        return self.__val
-    def setVal( self, __val ):
-        self.__val = __val
+    @property
+    def type( self ):
+        return self.__type
+    @value.setter
+    def value( self, type ):
+        self.__type = type
 
-    def getName( self ):
-        return self.__name
-    def setName( self, __name ):
-        self.__name = __name
-
-    def toString( self ): # Cannot put ANYTHING after backslash in these explict continuations
-        return f"uuid={self.__uuid} " \
-            f"symbol={self.__symbol} " \
-            f"name={self.__str_delim}{self.__name}{self.__str_delim} " \
-            f"val={self.__val}"
+    def toString( self ):
+        base_string = super().toString()
+        return f"{base_string} " \
+            f"symbol={self.__sym} " \
+            f"val={self.__value}"

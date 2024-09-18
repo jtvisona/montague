@@ -27,6 +27,7 @@ class Set( Object ):
         self.__val = val
 
     def toString( self ):
-        return f"uuid={self.__uuid} " \
+        base_string = super().toString()
+        return f"{base_string} " \
             f"val={self.__val} " \
             f"type={self.__type}"
