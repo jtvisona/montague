@@ -75,9 +75,11 @@ def main():
     ]
     code1 = CODE.Fragment( "fragment", code_fragment, "python" )
     code1.add_newlines()
+    print( f"has_newlines()={code1.has_newlines()}" )
     print( code1.concat_and_stringify_lines() )
     #exec( code1.concat_and_stringify_lines() )
     code1.remove_newlines()
+    
     print( code1.value )
 
     #"""

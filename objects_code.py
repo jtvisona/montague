@@ -19,14 +19,24 @@ class Fragment( Memo ):
 
     def add_newlines( self ):
         for index, each_line in enumerate( self.__lines ):
-            #print( f"Modifying line {index}:{U.squote(each_line)}" )
             self.__lines[ index ] = each_line + "\n"
     
     def remove_newlines( self ):
         for index, each_line in enumerate( self.__lines ):
-            #text = U.squote( str( each_line[ len(each_line)-2: len(each_line) ] ) )
-            #print( f"Modifying line {index}:{text} " )
             self.__lines[ index ] = U.drop_nl( each_line )
+
+    def has_newlines( self ):
+        has_flag = True
+        for each_line in self.__lines:
+            if each_line[len(each_line)-1] == "\n":
+                pass
+            else:
+                has_flag = False
+                break
+        return has_flag
+
+    #def exec( self ):
+
 
     def stringify_lines( self ):
         return str( self.__lines )
@@ -35,8 +45,6 @@ class Fragment( Memo ):
         concated_str = ""
         copy_lines = self.__lines
         for each_line in copy_lines:
-            #each_line = each_line.replace( "{", "\{" ) # Add detect backslash and maybe make utility function remove_escapes(), etc.
-            #each_line = each_line.replace( "}", "\}" )
             concated_str += each_line
         return concated_str
 

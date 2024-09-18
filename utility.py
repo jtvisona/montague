@@ -28,7 +28,7 @@ backtick = lambda s: f"`{s}`"
 sandwich_with = lambda s, delim: f"{delim}{s}{delim}"
 
 add_nl = lambda s: f"{s}\n"
-drop_nl = lambda s: f"{s[0:len(s)-2]}" if s[len(s)-1] == "\n" else s
+drop_nl = lambda s: f"{s[0:len(s)-1]}" if s[len(s)-1] == "\n" else s
 
 # Natural language
 
