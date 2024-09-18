@@ -27,8 +27,8 @@ class Process( Object ):
             f"\t{self.__body}"
         return python_expr
     
-    def toString( self ):
-        base_string = super().toString()
+    def to_string( self ):
+        base_string = super().to_string()
         return f"{base_string} " \
             f"args={self.__args}"
     

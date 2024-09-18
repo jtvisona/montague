@@ -52,7 +52,7 @@ class Object:
     def delim( self, delim: str ):
         self.__delim = delim
 
-    def toString( self ):
+    def to_string( self ):
         return f"uuid={self.__uuid} " \
             f"type={self.__type} " \
             f"name={self.__delim}{self.__name}{self.__delim} "

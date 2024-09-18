@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
 from objects_base import Object
 
+
+
 @dataclass
 class Proposition( Object ):
     __value : str = "There is no assigned valosition."
@@ -20,8 +22,8 @@ class Proposition( Object ):
     def value( self, value: str ):
         self.__value = value
 
-    def toString( self ): # Cannot put ANYTHING after backslash in these explict continuations
-        base_string = super().toString()
+    def to_string( self ): # Cannot put ANYTHING after backslash in these explict continuations
+        base_string = super().to_string()
         return f"{base_string} " \
         f"val={super().delim}{self.__value}{super().delim} " \
             f"lang={self.__lang}"
@@ -61,8 +63,8 @@ class Argument( Object ):
 
     # ADD def to_multi_MD( self ):
 
-    def toString( self ):
-        base_string = super().toString()
+    def to_string( self ):
+        base_string = super().to_string()
         return f"{base_string} " \
         f"val={super().delim}{self.__value}{super().delim} " \
         f"lang={self.__lang}"

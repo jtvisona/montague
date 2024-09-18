@@ -35,8 +35,8 @@ class Variable:
     def value( self, type: str ):
         self.__type = type
 
-    def toString( self ):
-        base_string = super().toString()
+    def to_string( self ):
+        base_string = super().to_string()
         return f"{base_string} " \
             f"symbol={self.__sym} " \
             f"val={self.__value}"
