@@ -13,7 +13,7 @@ import objects_logic as LOGIC
 import objects_text as TXT
 
 def main():
-    print(  "executing Montague" )
+    print(  "Executing Montague" )
     obj_man = OM.ObjectManager()
     
     # --------------------------------
@@ -67,17 +67,16 @@ def main():
     # objects_code
     # --------------------------------
 
-    ""
-    # Phrase and Sentence examples
+    """"
+    # Fragment example
     code_fragment = [   "my_set = { 1, 2, 3 }",
                         "for each_element in my_set:",
-                        "  print( each_element )"
-    ]
+                        "  print( each_element )" ]
     code1 = CODE.Fragment( "fragment", code_fragment, "python" )
     code1.add_newlines()
     print( f"has_newlines()={code1.has_newlines()}" )
     print( code1.concat_and_stringify_lines() )
-    #exec( code1.concat_and_stringify_lines() )
+    exec( code1.concat_and_stringify_lines() )
     code1.remove_newlines()
     
     print( code1.value )
@@ -98,6 +97,28 @@ def main():
     )
     #print( proc1.to_string() )
     #print( proc1.toPython() )
+    #"""
+
+    #"""
+    # Process with Fragment example
+    code_fragment = [   "my_set = {  }",
+                        "for each_natural in range( 100 ):",
+                        "  my_set.add( each_natural )" ]
+    code1 = CODE.Fragment( "fragment", code_fragment, "python" )
+    code1.add_newlines()
+
+    #'''
+    proc1 = FUN.Process(
+        "create_enumerable_set",
+        { "name": { "naturals_to_5" },
+            "type" : { "naturals" },
+            "max" : { "5" }
+        },
+        code1        
+    )
+    print( proc1.to_string() )
+    #print( proc1.to_python() )
+    #'''
     #"""
 
     # --------------------------------

@@ -1,3 +1,4 @@
+import globals as G
 from dataclasses import dataclass, field
 
 import copy as CP

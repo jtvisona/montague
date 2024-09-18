@@ -1,5 +1,7 @@
+import globals as G
 import utility as U
 from dataclasses import dataclass, field
+
 from objects_base import Object
 
 @dataclass

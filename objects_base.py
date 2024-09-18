@@ -1,5 +1,7 @@
-from dataclasses import dataclass
+import globals as G
 import utility as U
+from dataclasses import dataclass
+
 from uuid import uuid4
 
 # ----------------------------------------------------------------

@@ -1,3 +1,5 @@
+import globals as G
+
 from dataclasses import dataclass, field
 from objects_base import Object
 
