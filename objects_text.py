@@ -80,7 +80,7 @@ class Memo( Object ):
     __lines: list = field( default_factory=list )
     __lang: str = ""
 
-    def __init__ ( self, name: str = "", lines: list = "", lang: str = "english" ): # tighten types by adding Text
+    def __init__ ( self, name: str = "", lines: list = [], lang: str = "english" ): # tighten types by adding Text
         super().__init__( name )
         if not lines == []:
             self.__lines = lines

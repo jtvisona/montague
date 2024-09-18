@@ -27,6 +27,11 @@ backtick = lambda s: f"`{s}`"
 
 sandwich_with = lambda s, delim: f"{delim}{s}{delim}"
 
+add_nl = lambda s: f"{s}\n"
+drop_nl = lambda s: f"{s[0:len(s)-2]}" if s[len(s)-1] == "\n" else s
+
+# Natural language
+
 stop = lambda s: f"{s}."
 bang = lambda s: f"{s}!"
 huh = lambda s: f"{s}?"
@@ -39,3 +44,4 @@ cap_and_bang = lambda s: f"{s[0].upper()}{s[1:len(s)]}!"
 cap_and_huh = lambda s: f"{s[0].upper()}{s[1:len(s)]}?"
 cap_and_thus = lambda s: f"{s[0].upper()}{s[1:len(s)]};"
 uncap_and_drop = lambda s: f"{s[0].lower()}{s[1:len(s)-1]}"
+

@@ -7,6 +7,7 @@ import object_man as OM
 
 import objects_adt as ADT
 import objects_base as BASE
+import objects_code as CODE
 import objects_function as FUN
 import objects_logic as LOGIC
 import objects_text as TXT
@@ -50,7 +51,7 @@ def main():
     print( str(sen1.uuid) )
     #"""
 
-    #"""
+    """
     # obj_man.copy_obj( key ) examples
     sen1 = TXT.Sentence( "first", "the big house is nearby", "decl" )
     #print( sen1.to_string() )
@@ -60,6 +61,25 @@ def main():
     print( obj_man.annotated_list_keys() )
     obj_man.copy_obj( sen1 )
     print( obj_man.annotated_list_keys() )
+    #"""
+
+    # --------------------------------
+    # objects_code
+    # --------------------------------
+
+    ""
+    # Phrase and Sentence examples
+    code_fragment = [   "my_set = { 1, 2, 3 }",
+                        "for each_element in my_set:",
+                        "  print( each_element )"
+    ]
+    code1 = CODE.Fragment( "fragment", code_fragment, "python" )
+    code1.add_newlines()
+    print( code1.concat_and_stringify_lines() )
+    #exec( code1.concat_and_stringify_lines() )
+    code1.remove_newlines()
+    print( code1.value )
+
     #"""
 
     # --------------------------------
