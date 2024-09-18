@@ -3,11 +3,11 @@ from objects_base import Object
 
 @dataclass
 class Variable:
-    __symb : str = ""
-    __type : str = ""
-    __value : object = field( default_factory=object )
+    __symb: str = ""
+    __type: str = ""
+    __value: object = field( default_factory=object )
 
-    def __init__ ( self, name = "", symb = "", type = "" ):
+    def __init__ ( self, name = "", symb: str = "", type: str = "" ): # Create Type
         super().__init__( name )
         if not symb == "":
             self.__symb = symb
@@ -16,23 +16,23 @@ class Variable:
 
     @property
     def symb( self ):
-        return self.__sym
+        return self.__symb
     @symb.setter
-    def symb( self, __sym ):
-        self.__sym = __sym
+    def symb( self, symb ):
+        self.__symb = symb
 
     @property
     def value( self ):
         return self.__value
     @value.setter
-    def value( self, __value ):
-        self.__value = __value
+    def value( self, value: str ):
+        self.__value = value
 
     @property
     def type( self ):
         return self.__type
     @value.setter
-    def value( self, type ):
+    def value( self, type: str ):
         self.__type = type
 
     def toString( self ):

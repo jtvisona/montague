@@ -12,12 +12,12 @@ Base class for all objects contained in the montague application.
 
 @dataclass
 class Object:
-    __uuid : str = ""
-    __type : str = ""
-    __name : str = ""
-    __delim : str = "`"
+    __uuid: str = ""
+    __type: str = ""
+    __name: str = ""
+    __delim: str = "`"
 
-    def __init__ ( self, name = "" ):
+    def __init__ ( self, name: str = "" ):
         self.__uuid = uuid4() # returns UUID obj and not string; to convert str(self.__uuid)
         self.__type = type( self )
         if not name == "":
@@ -27,7 +27,7 @@ class Object:
     def uuid( self ):
         return self.__uuid
     @uuid.setter
-    def uuid( self, uuid ):
+    def uuid( self, uuid: str ):
         self.__uuid = uuid
     def get_uuid_str( self ):
         return str( self.__uuid )
@@ -42,14 +42,14 @@ class Object:
     def name( self ):
         return self.__name
     @name.setter
-    def name( self, name ):
+    def name( self, name: str ):
         self.__name = name
 
     @property
     def delim( self ):
         return self.__delim
     @delim.setter
-    def delim( self, delim ):
+    def delim( self, delim: str ):
         self.__delim = delim
 
     def toString( self ):
@@ -67,7 +67,7 @@ Keeps track of metadata about all objects that have been instanticated
 
 @dataclass
 class ObjectManager:
-    __object_dict : dict = field( default_factory=dict )
+    __object_dict: dict = field( default_factory=dict )
 
     def __init__( self ): # NEED TO INCLUDE SELF HERE OR CAUSES DOWNSTREAM PROBLEMS
         print( "Creating ObjectManager" )
@@ -77,17 +77,16 @@ class ObjectManager:
     def object_list( self ):
         return self.__object_dict
 
-    def add_object( self, obj ):
-        #self.__object_dict[ U.get_substring( obj.uuid, "'", "'" ) ] = obj
+    def add_object( self, obj: object ):
         self.__object_dict[ str( obj.uuid ) ] = obj
 
-    def pop_object( self, obj ):
+    def pop_object( self, obj: object ):
         return self.__object_dict.pop( obj.get_uuid_str() )
 
     def list_keys( self ):
         return list( self.__object_dict.keys() )
         
-    def get_val_by_key( self, key ):
+    def get_val_by_key( self, key: str ):
         return self.__object_dict.get( key )
     
     def get_size( self ):
