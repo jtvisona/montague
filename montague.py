@@ -12,7 +12,7 @@ import objects_text as TEXT
 
 def main():
     print( "Executing Montague" )
-    OM = BASE.ObjectManager()
+    obj_man = BASE.ObjectManager()
     
     # --------------------------------
     # objects_adt
@@ -25,7 +25,7 @@ def main():
     print()
     print( set1.toString() )
     """
-    
+
     # --------------------------------
     # objects_function
     # --------------------------------
@@ -36,7 +36,7 @@ def main():
             "second_arg" : { "proposition" },
             "third_arg" : { "set" }
         },
-        "DO SOME STUFF"
+        "DO Sobj_manE STUFF"
     )
     #print( proc1.toString() )
     #print( proc1.toPython() )
@@ -55,22 +55,26 @@ def main():
     # --------------------------------
     # objects_text
     # --------------------------------
-    """
-    prop1 = TEXT.Proposition( "This is also a proposition." )
-    prop2 = TEXT.Proposition( "is(Socrates,mortal)", "predcalc" )
-    prop1.regen_uuid()
-    print( prop1.toString() )
-    print( prop2.toString() )
-    OM.add_object( prop1 )
-    OM.add_object( prop2 )
-    print( OM.list_keys() )
-    print( OM.get_val_by_key( prop2.get_uuid_str() ) )
-    print( OM.get_size() )
-    OM.pop_object( prop2 )
-    print( OM.object_list )
-    OM.create_obj( exec_command )
-    print( OM.list_keys() )
-    """
+    #"""
+    prop1 = TEXT.Proposition( "P1", "All men are mortal.", "english" )
+    prop2 = TEXT.Proposition( "P2", "Socrates is a man.", "english" )
+    concl = TEXT.Proposition( "C", "Socrates is mortal.", "english" )
+    obj_man.add_object( prop1 ) # CONVERT TO: prop1.register( obj_man )
+    obj_man.add_object( prop2 )
+    obj_man.add_object( concl )
+
+    
+
+    #prop1.regen_uuid()
+    #print( prop1.toString() )
+    #print( prop2.toString() )
+    # print( obj_man.list_keys() )
+    #print( obj_man.get_val_by_key( prop2.get_uuid_str() ) )
+    #print( obj_man.get_size() )
+    #obj_man.pop_object( prop2 )
+    #print( obj_man.object_list )
+    #print( obj_man.list_keys() )
+    #"""
 
 # if this module is called first, call the main function
 if __name__ == "__main__":

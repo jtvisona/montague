@@ -52,6 +52,12 @@ class Argument( Object ):
     def val( self, conclusion ):
         self.__conclusion = conclusion
 
+    def toMultiString( self ):
+        multi_str = ""
+        for prop in self.__premises:
+            multi_str += type( prop.val )
+        return multi_str
+
     def toString( self ):
         base_string = super().toString()
         return f"{base_string} " \
