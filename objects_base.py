@@ -1,4 +1,4 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 import utility as U
 from uuid import uuid4
 
@@ -29,7 +29,7 @@ class Object:
     @uuid.setter
     def uuid( self, uuid: str ):
         self.__uuid = uuid
-    def get_uuid_str( self ):
+    def stringified_uuid( self ):
         return str( self.__uuid )
     def regen_uuid( self ):
         self.__uuid = uuid4()
@@ -56,43 +56,3 @@ class Object:
         return f"uuid={self.__uuid} " \
             f"type={self.__type} " \
             f"name={self.__delim}{self.__name}{self.__delim} "
-
-# ----------------------------------------------------------------
-# OBJECTMANAGER
-# ----------------------------------------------------------------
-
-"""
-Keeps track of metadata about all objects that have been instanticated
-"""
-
-@dataclass
-class ObjectManager:
-    __object_dict: dict = field( default_factory=dict )
-
-    def __init__( self ): # NEED TO INCLUDE SELF HERE OR CAUSES DOWNSTREAM PROBLEMS
-        print( "Creating ObjectManager" )
-        self.__object_dict = {}
-
-    @property
-    def object_list( self ):
-        return self.__object_dict
-
-    def add_object( self, obj: object ):
-        self.__object_dict[ str( obj.uuid ) ] = obj
-
-    def pop_object( self, obj: object ):
-        return self.__object_dict.pop( obj.get_uuid_str() )
-
-    def list_keys( self ):
-        return list( self.__object_dict.keys() )
-        
-    def get_val_by_key( self, key: str ):
-        return self.__object_dict.get( key )
-    
-    def get_size( self ):
-        return len( self.__object_dict )
-    
-    """ EXPERIMENTAL
-    def create_obj( self, obj_cmd ):
-        exec( obj_cmd )
-    """

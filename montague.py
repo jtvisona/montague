@@ -3,6 +3,8 @@ This software is to handle formal systems.
 """
 
 import utility as U
+import object_man as OM
+
 import objects_adt as ADT
 import objects_base as BASE
 import objects_function as FUN
@@ -11,7 +13,7 @@ import objects_text as TXT
 
 def main():
     print(  "executing Montague" )
-    obj_man = BASE.ObjectManager()
+    obj_man = OM.ObjectManager()
     
     # --------------------------------
     # objects_adt
@@ -37,9 +39,33 @@ def main():
     #"""
 
     # --------------------------------
-    # objects_function
+    # objects_base
     # --------------------------------
 
+    """
+    # Phrase and Sentence examples
+    sen1 = TXT.Sentence( "first", "the big house is nearby", "decl" )
+    print( str(sen1.uuid) )
+    sen1.regen_uuid()
+    print( str(sen1.uuid) )
+    #"""
+
+    #"""
+    # obj_man.copy_obj( key ) examples
+    sen1 = TXT.Sentence( "first", "the big house is nearby", "decl" )
+    #print( sen1.to_string() )
+    obj_man.add_object( sen1 )
+    #print( obj_man.list_keys() )
+    #print( obj_man.stringified_list_keys() )
+    print( obj_man.annotated_list_keys() )
+    obj_man.copy_obj( sen1 )
+    print( obj_man.annotated_list_keys() )
+    #"""
+
+    # --------------------------------
+    # objects_function
+    # --------------------------------
+     
     """
     proc1 = FUN.Process( "function_call",
         { "first_arg": { "number" },
@@ -69,14 +95,6 @@ def main():
     """
     # Phrase and Sentence examples
     sen1 = TXT.Sentence( "first", "the big house is nearby", "decl" )
-    print( str(sen1.uuid) )
-    sen1.regen_uuid()
-    print( str(sen1.uuid) )
-    #"""
-
-    """
-    # Phrase and Sentence examples
-    sen1 = TXT.Sentence( "first", "the big house is nearby", "decl" )
     print( sen1.value )
     sen1.to_cap_and_stop()
     print( sen1.value )
@@ -97,10 +115,12 @@ def main():
 
     """
     # Argument example
-    prop1 = TXT.Proposition( "P1", "All men are mortal.", "english" )
-    prop2 = TXT.Proposition( "P2", "Socrates is a man.", "english" )
-    concl = TXT.Proposition( "C", "Socrates is mortal.", "english" )
-    obj_man.add_object( prop1 ) # CONVERT TO: prop1.register( obj_man )
+    sen1 = ( "S1", "All men are mortal." )
+    sen2 = ( "S2", "Socrates is a man." )
+    sen3 = ( "S3", "Socrates is mortal." )
+    prop1 = TXT.Proposition( "P1", sen1 )
+    prop2 = TXT.Proposition( "P2", sen2 )
+    concl = TXT.Proposition( "C", sen3 )
 
     arg1 = TXT.Argument( "syllogism", [prop1, prop2], concl )
     print( arg1.toMultiString() )
@@ -108,26 +128,27 @@ def main():
 
     """
     # Proposition example
-    sen1 = TXT.Sentence( "example", "Die Gedanken Sind Frei.", "german")
+    sen1 = TXT.Sentence( "example", "Die Gedanken sind Frei.", "german")
     prop1 = TXT.Proposition( "P", sen1, True )
+    print( prop1.stringify_sentence() )
     print( prop1.stringify_appraised_truth_cond() )
     #"""
 
     """
-    # Expand examples
+    # Proposition examples
     sen1 = TXT.Proposition( "S1", "All men are mortal." )
     sen2 = TXT.Proposition( "S2", "Socrates is a man." )
     prop1 = TXT.Proposition( "P1", sen1 )
     prop2 = TXT.Proposition( "P2", sen2 )
-    
     print( prop1.stringify_sentence() )
     print( prop2.stringify_sentence() )
+
     # print( obj_man.list_keys() )
     #print( obj_man.get_val_by_key( prop2.get_uuid_str() ) )
     #print( obj_man.get_size() )
     #obj_man.pop_object( prop2 )
     #print( obj_man.object_list )
-    #print( obj_man.list_keys() )
+
     #"""
 
 # if this module is called first, call the main function
