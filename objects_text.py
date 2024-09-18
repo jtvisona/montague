@@ -1,10 +1,84 @@
+import utility as U
 from dataclasses import dataclass, field
 from objects_base import Object
 
 @dataclass
+class Phrase( Object ):
+    __value: str = ""
+    __type: str = ""
+    __lang: str = ""
+
+    def __init__ ( self, name: str = "", value: str = "", lang: str = "english" ):
+        super().__init__( name )
+        self.__value = value
+        self.__lang = lang
+
+    @property
+    def value( self ):
+        return self.__value
+    @value.setter
+    def value( self, value: str ):
+        self.__value = value
+
+    @property
+    def type( self ):
+        return self.__type
+    @value.setter
+    def type( self, type: str ):
+        self.__type = type
+
+    def to_string( self ):
+        base_string = super().to_string()
+        return f"{base_string} " \
+        f"val={super().delim}{self.__value}{super().delim} " \
+            f"lang={self.__lang}"
+
+@dataclass
+class Sentence( Object ):
+    __value: str = ""
+    __type: str = ""
+    __lang: str = ""
+
+    def __init__ ( self, name: str = "", value: str = "", lang: str = "english" ):
+        super().__init__( name )
+        self.__value = value
+        self.__lang = lang
+
+    @property
+    def value( self ):
+        return self.__value
+    @value.setter
+    def value( self, value: str ):
+        self.__value = value
+
+    @property
+    def type( self ):
+        return self.__type
+    @value.setter
+    def type( self, type: str ):
+        self.__type = type
+
+    def cap_and_stop( self ):
+        self.__value = U.cap_and_stop( self.__value )
+    def cap_and_bang( self ):
+        self.__value = U.cap_and_bang( self.__value )
+    def cap_and_huh( self ):
+        self.__value = U.cap_and_huh( self.__value )
+    def cap_and_also( self ):
+        self.__value = U.cap_and_also( self.__value )
+    def uncap_and_drop( self ):
+        self.__value = U.uncap_and_drop( self.__value )
+
+    def to_string( self ): # Cannot put ANYTHING after backslash in these explict continuations
+        base_string = super().to_string()
+        return f"{base_string} " \
+        f"val={super().delim}{self.__value}{super().delim} " \
+            f"lang={self.__lang}"
+
+@dataclass
 class Memo( Object ):
-    __lines : list = field( default_factory=list )
-    __lang : str = ""
+    __lines: list = field( default_factory=list )
+    __lang: str = ""
 
     def __init__ ( self, name: str = "", lines: list = "", lang: str = "english" ): # tighten types by adding Text
         super().__init__( name )
@@ -29,7 +103,7 @@ class Memo( Object ):
     def to_stringified_list( self ):
         return str( self.__lines )
 
-    def to_string( self ): # Cannot put ANYTHING after backslash in these explict continuations
+    def to_string( self ):
         base_string = super().to_string()
         return f"{base_string} " \
         f"lines={super().delim}{self.__lines}{super().delim} " \
@@ -38,8 +112,8 @@ class Memo( Object ):
 
 @dataclass
 class Proposition( Object ):
-    __value : str = ""
-    __lang : str = ""
+    __value: str = ""
+    __lang: str = ""
 
     def __init__ ( self, name: str = "", value: str = "", lang: str = "english" ):
         super().__init__( name )
@@ -61,8 +135,8 @@ class Proposition( Object ):
     
 @dataclass
 class Argument( Object ):
-    __premises : list = field( default_factory=list ) # Can tighten types by making this PropositionList
-    __conclusion : Proposition = ""
+    __premises: list = field( default_factory=list ) # Can tighten types by making this PropositionList
+    __conclusion: Proposition = ""
 
     def __init__ ( self, name: str = "", premises: list = [], conclusion: Proposition = "" ): # Can tighten types by making SafeStr
         super().__init__( name )

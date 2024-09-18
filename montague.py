@@ -7,7 +7,7 @@ import objects_adt as ADT
 import objects_base as BASE
 import objects_function as FUN
 import objects_logic as LOGIC
-import objects_text as TEXT
+import objects_text as TXT
 
 #import objects_logic as LOGIC
 
@@ -26,7 +26,8 @@ def main():
         print( "'" + str( each_value ) + "'", end= " " )
     print()
     print( set1.to_string() )
-    """
+    #"""
+
     """
     # Multiset example
     mset1 = ADT.Multiset( "TestSet", [3,4,5,1,1], "whole" )
@@ -35,7 +36,7 @@ def main():
     #print()
     print( mset1.to_stringified_list() )
     #print( mset1.to_string() )
-    """
+    #"""
 
     # --------------------------------
     # objects_function
@@ -51,7 +52,7 @@ def main():
     )
     #print( proc1.to_string() )
     #print( proc1.toPython() )
-    """
+    #"""
 
     # --------------------------------
     # objects_logic
@@ -61,18 +62,29 @@ def main():
     var1 = LOGIC.Variable( "x", "length" )
     var1.setVal( set1 )
     print( var1.to_string() )
-    """
+    #"""
 
     # --------------------------------
     # objects_text
     # --------------------------------
 
     #"""
+    # Phrase and Sentence examples
+    sen1 = TXT.Sentence( "first", "the big house is nearby", "decl" )
+    print( sen1.value )
+    sen1.to_cap_and_stop()
+    print( sen1.value )
+    sen1.to_uncap_and_drop()
+    print( sen1.value )
+
+    #"""
+
+    """
     # Memo example
     lines = [ "This is a test of the EBS.", \
         "This is only a test.",
         "If this were a real emergency..." ]
-    memo1 = TEXT.Memo( "test", lines )
+    memo1 = TXT.Memo( "test", lines )
     #print( memo1.to_string() )
     #print( memo1.to_stringified_list() )
     print( memo1.to_stringified_lines(), end="" )
@@ -80,19 +92,19 @@ def main():
 
     """
     # Argument example
-    prop1 = TEXT.Proposition( "P1", "All men are mortal.", "english" )
-    prop2 = TEXT.Proposition( "P2", "Socrates is a man.", "english" )
-    concl = TEXT.Proposition( "C", "Socrates is mortal.", "english" )
+    prop1 = TXT.Proposition( "P1", "All men are mortal.", "english" )
+    prop2 = TXT.Proposition( "P2", "Socrates is a man.", "english" )
+    concl = TXT.Proposition( "C", "Socrates is mortal.", "english" )
     obj_man.add_object( prop1 ) # CONVERT TO: prop1.register( obj_man )
 
-    arg1 = TEXT.Argument( "syllogism", [prop1, prop2], concl )
+    arg1 = TXT.Argument( "syllogism", [prop1, prop2], concl )
     print( arg1.toMultiString() )
-    """
+    #"""
 
     """
     # Expand examples
-    prop1 = TEXT.Proposition( "P1", "All men are mortal.", "english" )
-    prop2 = TEXT.Proposition( "P2", "Socrates is a man.", "english" )
+    prop1 = TXT.Proposition( "P1", "All men are mortal.", "english" )
+    prop2 = TXT.Proposition( "P2", "Socrates is a man.", "english" )
     #prop1.regen_uuid()
     #print( prop1.to_string() )
     #print( prop2.to_string() )
@@ -102,7 +114,7 @@ def main():
     #obj_man.pop_object( prop2 )
     #print( obj_man.object_list )
     #print( obj_man.list_keys() )
-    """
+    #"""
 
 # if this module is called first, call the main function
 if __name__ == "__main__":
