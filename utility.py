@@ -18,3 +18,13 @@ def get_substring( tmp_str, start_delim, end_delim ):
     substr_start = tmp_str.find( start_delim  ) + len( start_delim ) # start and end delimitters can be arbitrary long substringthemselves
     substr_end = tmp_str.find( end_delim, substr_start)
     return tmp_str[ substr_start : substr_end ]
+
+squote = lambda s: f"'{s}'"
+dquote = lambda s: f'"{s}"'
+bracket = lambda s: f"[{s}]"
+brace = lambda s: f"[{s}]"
+backtick = lambda s: f"`{s}`"
+stop = lambda s: f"{s}."
+sandwich_with = lambda s, delim: f"{delim}{s}{delim}"
+capitalize = lambda s: f"{s[0].upper()}{s[1:len(s)]}"
+cap_and_stop = lambda s: f"{s[0].upper()}{s[1:len(s)]}."

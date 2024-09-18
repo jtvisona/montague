@@ -2,6 +2,7 @@
 This software is to handle formal systems.
 """
 
+import utility as U
 import objects_adt as ADT
 import objects_base as BASE
 import objects_function as FUN
@@ -11,7 +12,7 @@ import objects_text as TEXT
 #import objects_logic as LOGIC
 
 def main():
-    print( "Executing Montague" )
+    print(  "executing Montague" )
     obj_man = BASE.ObjectManager()
     
     # --------------------------------

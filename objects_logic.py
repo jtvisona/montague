@@ -9,16 +9,14 @@ class Variable:
 
     def __init__ ( self, name = "", symb: str = "", type: str = "" ): # Create Type
         super().__init__( name )
-        if not symb == "":
-            self.__symb = symb
-        if not type == "":
-            self.__type = type
+        self.__symb = symb
+        self.__type = type
 
     @property
     def symb( self ):
         return self.__symb
     @symb.setter
-    def symb( self, symb ):
+    def symb( self, symb: str ): # tighten up by adding Symbol type
         self.__symb = symb
 
     @property
@@ -31,8 +29,8 @@ class Variable:
     @property
     def type( self ):
         return self.__type
-    @value.setter
-    def value( self, type: str ):
+    @type.setter
+    def type( self, type: str ):
         self.__type = type
 
     def to_string( self ):
