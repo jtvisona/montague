@@ -10,6 +10,8 @@ class Variable:
     __value: object = field( default_factory=object )
 
     def __init__ ( self, name = "", symb: str = "", type: str = "" ): # Create Type
+        if G.debug == True:
+            print( f"name='{name}'\nsymb='{symb}'\ntype='{type}'" )
         super().__init__( name )
         self.__symb = symb
         self.__type = type

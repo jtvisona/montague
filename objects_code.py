@@ -6,10 +6,13 @@ from objects_text import Memo
 @dataclass
 class Fragment( Memo ):
 
-    def __init__ ( self, name: str = "", lines: list = [], lang = "" ):
+    __type: str = ""
+
+    def __init__ ( self, name: str = "", lines: list = [], lang = "", type = "" ):
         if G.debug == True:
             print( f"name='{name}'\nlines='{lines[0]}'...\nlang='{lang}'" )
-        super().__init__( name=name, lines=lines, lang=lang )
+        super().__init__( name, lines, lang )
+        self.__type = type
 
     @property
     def lines( self ):
@@ -37,7 +40,9 @@ class Fragment( Memo ):
         return has_flag
 
     #def exec( self ):
-
+    #def number_lines( self ):
+    #def add_terminator( self, terminator ):
+    #def remove_terminator( self ):
 
     def stringify_lines( self ):
         return str( super().__lines )

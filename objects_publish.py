@@ -9,6 +9,8 @@ class Document:
     __type: str = ""
 
     def __init__ ( self, name = "", contents: list = [], type: str = "" ):
+        if G.debug == True:
+            print( f"name='{name}'\contents='{contents[0]}'...\ntype='{type}'" )
         super().__init__( name )
         self.__contents = contents
         self.__type = type

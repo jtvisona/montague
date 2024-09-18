@@ -15,15 +15,14 @@ Base class for all objects contained in the montague application.
 @dataclass
 class Object:
     __uuid: str = ""
-    __type: str = ""
     __name: str = ""
     __delim: str = "`"
 
     def __init__ ( self, name: str = "" ):
+        if G.debug == True:
+            print( f"name='{name}'" )
         self.__uuid = uuid4() # returns UUID obj and not string; to convert str(self.__uuid)
-        self.__type = type( self )
-        if not name == "":
-            self.__name = name
+        self.__name = name
 
     @property
     def uuid( self ):
@@ -56,5 +55,4 @@ class Object:
 
     def to_string( self ):
         return f"uuid={self.__uuid} " \
-            f"type={self.__type} " \
             f"name={self.__delim}{self.__name}{self.__delim} "

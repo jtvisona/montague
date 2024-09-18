@@ -9,6 +9,8 @@ class Set( Object ):
     __type: str = ""
 
     def __init__ ( self, name: str = "", value: set = {}, type: str = "" ):
+        if G.debug == True:
+            print( f"name='{name}'\nlines='{value}'...\nlang='{type}'" )
         super().__init__( name )
         self.__value = value
         self.__type = type

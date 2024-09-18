@@ -10,6 +10,8 @@ class Process( Object ):
     __body2: str = "test"
 
     def __init__ ( self, name: str = "", args: dict = {}, body: Fragment = "" ):
+        if G.debug == True:
+            print( f"name='{name}'\nargs='{dict}'\nbody='{body}'" )
         super().__init__( name )
         self.__args = args
         self.__body = body

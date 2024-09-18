@@ -83,6 +83,8 @@ class Memo( Object ):
     __lang: str = ""
 
     def __init__ ( self, name: str = "", lines: list = [], lang: str = "english" ): # tighten types by adding Text
+        if G.debug == True:
+            print( f"name='{name}'\lines='{lines[0]}'...\lang='{lang}'" )
         super().__init__( name )
         if not lines == []:
             self.__lines = lines
@@ -117,6 +119,8 @@ class Proposition( Object ):
     __truth_cond: bool = ""
 
     def __init__ ( self, name: str = "", value: Sentence = "", truth_cond: bool = "" ):
+        if G.debug == True:
+            print( f"name='{name}'\nvalue='{value}'\ntruth_cond='{truth_cond}'" )
         super().__init__( name )
         self.__value = value
         self.__truth_cond = truth_cond
@@ -155,6 +159,8 @@ class Argument( Object ):
     __conclusion: Proposition = ""
 
     def __init__ ( self, name: str = "", premises: list = [], conclusion: Proposition = "" ): # Can tighten types by making SafeStr
+        if G.debug == True:
+            print( f"name='{name}'\npremises='{premises[0]}...'\nconclusion='{conclusion}'" )
         super().__init__( name )
         if not premises == []:
             self.__premises = premises
