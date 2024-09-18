@@ -1,19 +1,50 @@
 from dataclasses import dataclass, field
 from objects_base import Object
 
+@dataclass
+class Memo( Object ):
+    __lines : list = field( default_factory=list )
+    __lang : str = ""
+
+    def __init__ ( self, name: str = "", lines: list = "", lang: str = "english" ): # tighten types by adding Text
+        super().__init__( name )
+        if not lines == []:
+            self.__lines = lines
+        if not lang == "":
+            self.__lang = lang
+
+    @property
+    def lines( self ):
+        return self.__lines
+    @lines.setter
+    def value( self, lines: list ):
+        self.__lines = lines
+
+    def to_stringified_lines( self ):
+        stringified_lines = ""
+        for each_line in self.__lines:
+            stringified_lines += each_line
+        return stringified_lines
+
+    def to_stringified_list( self ):
+        return str( self.__lines )
+
+    def to_string( self ): # Cannot put ANYTHING after backslash in these explict continuations
+        base_string = super().to_string()
+        return f"{base_string} " \
+        f"lines={super().delim}{self.__lines}{super().delim} " \
+            f"lang={self.__lang}"
 
 
 @dataclass
 class Proposition( Object ):
-    __value : str = "There is no assigned valosition."
-    __lang : str = "english"
+    __value : str = ""
+    __lang : str = ""
 
-    def __init__ ( self, name: str = "", value: str = "", lang: str = "" ):
+    def __init__ ( self, name: str = "", value: str = "", lang: str = "english" ):
         super().__init__( name )
-        if not val == "":
-            self.__value = value
-        if not lang == "":
-            self.__lang = lang
+        self.__value = value
+        self.__lang = lang
 
     @property
     def value( self ):

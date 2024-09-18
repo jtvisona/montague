@@ -65,20 +65,31 @@ def main():
     # --------------------------------
     # objects_text
     # --------------------------------
+
+    lines = [ "This is a test of the EBS.\n", \
+        "This is only a test.\n",
+        "If this were a real emergency...\n" ]
+    memo1 = TEXT.Memo( "test", lines )
+    #print( memo1.to_string() )
+    #print( memo1.to_stringified_list() )
+    print( memo1.to_stringified_lines() )
+    
+
     """
+    # Argument example
     prop1 = TEXT.Proposition( "P1", "All men are mortal.", "english" )
     prop2 = TEXT.Proposition( "P2", "Socrates is a man.", "english" )
     concl = TEXT.Proposition( "C", "Socrates is mortal.", "english" )
     obj_man.add_object( prop1 ) # CONVERT TO: prop1.register( obj_man )
-    obj_man.add_object( prop2 )
-    obj_man.add_object( concl )
-
 
     arg1 = TEXT.Argument( "syllogism", [prop1, prop2], concl )
-    obj_man.add_object( arg1 )
     print( arg1.toMultiString() )
+    """
 
-
+    """
+    # Expand examples
+    prop1 = TEXT.Proposition( "P1", "All men are mortal.", "english" )
+    prop2 = TEXT.Proposition( "P2", "Socrates is a man.", "english" )
     #prop1.regen_uuid()
     #print( prop1.to_string() )
     #print( prop2.to_string() )
