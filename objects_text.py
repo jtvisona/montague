@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 from objects_base import Object
-
+ 
 @dataclass
 class Proposition( Object ):
     __val : str = "There is no assigned valosition."
@@ -52,11 +52,14 @@ class Argument( Object ):
     def val( self, conclusion ):
         self.__conclusion = conclusion
 
-    def toMultiString( self ):
+    def to_multi_string( self ):
         multi_str = ""
         for prop in self.__premises:
-            multi_str += type( prop.val )
+            multi_str += prop.name + ":\t" + prop.val + "\n"
+        multi_str += self.__conclusion.name + ":\t" + self.__conclusion.val + "\n"
         return multi_str
+
+    # ADD def to_multi_MD( self ):
 
     def toString( self ):
         base_string = super().toString()

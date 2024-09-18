@@ -63,7 +63,11 @@ def main():
     obj_man.add_object( prop2 )
     obj_man.add_object( concl )
 
-    
+    """
+    arg1 = TEXT.Argument( "syllogism", [prop1, prop2], concl )
+    obj_man.add_object( arg1 )
+    print( arg1.toMultiString() )
+    """
 
     #prop1.regen_uuid()
     #print( prop1.toString() )
