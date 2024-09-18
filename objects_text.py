@@ -1,5 +1,6 @@
 import globals as G
 import utility as U
+import inspect as I
 from dataclasses import dataclass, field
 
 from objects_base import Object
@@ -11,6 +12,9 @@ class Phrase( Object ):
     __lang: str = ""
 
     def __init__ ( self, name: str = "", value: str = "", lang: str = "english" ):
+        if G.debug:
+            print( f"{self.__class__.__name__}.{I.currentframe().f_code.co_name}() called by {I.stack()[1].function}()" )
+            print( f"* ArgumentDebug:\tname='{name}'\n\tcontents='{value}'\n\tlang='{type}'" )
         super().__init__( name )
         self.__value = value
         self.__lang = lang
@@ -42,6 +46,12 @@ class Sentence( Object ):
     __lang: str = ""
 
     def __init__ ( self, name: str = "", value: str = "", lang: str = "english" ):
+        if G.debug:
+            #previous_frame = I.currentframe().f_back
+            #previous_class = previous_frame.f_locals['obj_man'].__class__.__name__ if not previous_frame.f_locals == {} else "montague"
+            print( f"*** {self.__class__.__name__}.{I.currentframe().f_code.co_name}() " \
+                f"called by {I.stack()[1].function}()" )
+            print( f"* Args:\n\tname='{name}'\n\tvalue='{value}'\n\tlang='{lang}'" )
         super().__init__( name )
         self.__value = value
         self.__lang = lang
@@ -83,8 +93,8 @@ class Memo( Object ):
     __lang: str = ""
 
     def __init__ ( self, name: str = "", lines: list = [], lang: str = "english" ): # tighten types by adding Text
-        if G.debug == True:
-            print( f"name='{name}'\lines='{lines[0]}'...\lang='{lang}'" )
+        if G.debug:
+            print( f"name='{name}'\nlines='{lines[0]}'...\nlang='{lang}'" )
         super().__init__( name )
         if not lines == []:
             self.__lines = lines
@@ -119,7 +129,7 @@ class Proposition( Object ):
     __truth_cond: bool = ""
 
     def __init__ ( self, name: str = "", value: Sentence = "", truth_cond: bool = "" ):
-        if G.debug == True:
+        if G.debug:
             print( f"name='{name}'\nvalue='{value}'\ntruth_cond='{truth_cond}'" )
         super().__init__( name )
         self.__value = value
@@ -159,7 +169,7 @@ class Argument( Object ):
     __conclusion: Proposition = ""
 
     def __init__ ( self, name: str = "", premises: list = [], conclusion: Proposition = "" ): # Can tighten types by making SafeStr
-        if G.debug == True:
+        if G.debug:
             print( f"name='{name}'\npremises='{premises[0]}...'\nconclusion='{conclusion}'" )
         super().__init__( name )
         if not premises == []:

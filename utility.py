@@ -1,3 +1,5 @@
+flag_main = lambda s: f"*** Montague.main.print() -> {s}'"
+
 # ----------------------------------------------------------------
 # get_substring
 # ----------------------------------------------------------------
@@ -44,4 +46,3 @@ cap_and_bang = lambda s: f"{s[0].upper()}{s[1:len(s)]}!"
 cap_and_huh = lambda s: f"{s[0].upper()}{s[1:len(s)]}?"
 cap_and_thus = lambda s: f"{s[0].upper()}{s[1:len(s)]};"
 uncap_and_drop = lambda s: f"{s[0].lower()}{s[1:len(s)-1]}"
-

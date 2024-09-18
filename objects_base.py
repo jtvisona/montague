@@ -1,5 +1,6 @@
 import globals as G
 import utility as U
+import inspect as I
 from dataclasses import dataclass
 
 from uuid import uuid4
@@ -19,8 +20,9 @@ class Object:
     __delim: str = "`"
 
     def __init__ ( self, name: str = "" ):
-        if G.debug == True:
-            print( f"name='{name}'" )
+        if G.debug:
+            print( f"{super().__class__}.{I.currentframe().f_code.co_name}() called by {I.stack()[1].function}()" )
+            print( f"* Args:\n\tname='{name}'" )
         self.__uuid = uuid4() # returns UUID obj and not string; to convert str(self.__uuid)
         self.__name = name
 

@@ -1,4 +1,5 @@
 import globals as G
+import inspect as I
 from dataclasses import dataclass, field
 from objects_base import Object
 from objects_code import Fragment
@@ -10,7 +11,8 @@ class Process( Object ):
     __body2: str = "test"
 
     def __init__ ( self, name: str = "", args: dict = {}, body: Fragment = "" ):
-        if G.debug == True:
+        if G.debug:
+            print( f"{self.__class__.__name__}.{I.currentframe().f_code.co_name}() called by {I.stack()[1].function}()" )
             print( f"name='{name}'\nargs='{dict}'\nbody='{body}'" )
         super().__init__( name )
         self.__args = args

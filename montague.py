@@ -1,5 +1,8 @@
 """
-This software is to handle formal systems.
+Montague is an object-manipulation framework designed to support encoding arbitary formal systems.
+It is named after Richard Montague, who along with Barbara Partee and others, advanced linguisitc formal semantics.
+    by Jonathan Visona 
+    email jtvisona yahoo.com
 """
 
 import utility as U
@@ -13,7 +16,7 @@ import objects_logic as LOGIC
 import objects_text as TXT
 
 def main():
-    print(  "Executing Montague" )
+    print( "\n******** Executing Montague\n" )
     obj_man = OM.ObjectManager()
     
     # --------------------------------
@@ -44,23 +47,23 @@ def main():
     # --------------------------------
 
     """
-    # Phrase and Sentence examples
+    # Sentence and regenerating UUID example
     sen1 = TXT.Sentence( "first", "the big house is nearby", "decl" )
     print( str(sen1.uuid) )
     sen1.regen_uuid()
     print( str(sen1.uuid) )
     #"""
 
-    """
+    #"""
     # obj_man.copy_obj( key ) examples
     sen1 = TXT.Sentence( "first", "the big house is nearby", "decl" )
-    #print( sen1.to_string() )
+    print( U.flag_main( f"{sen1.to_string()=}" ) )
     obj_man.add_object( sen1 )
-    #print( obj_man.list_keys() )
-    #print( obj_man.stringified_list_keys() )
-    print( obj_man.annotated_list_keys() )
+    print( U.flag_main( f"{obj_man.list_keys()=}" ) )
+    print( U.flag_main( f"{obj_man.stringified_list_keys()=}" ) )
+    print( U.flag_main( f"{obj_man.annotated_list_keys()=}" ) )
     obj_man.copy_obj( sen1 )
-    print( obj_man.annotated_list_keys() )
+    print( U.flag_main( f"{obj_man.annotated_list_keys()=}" ) )
     #"""
 
     # --------------------------------
@@ -99,7 +102,7 @@ def main():
     #print( proc1.toPython() )
     #"""
 
-    #"""
+    """
     # Process with Fragment example
     code_fragment = [   "my_set = {  }",
                         "for each_natural in range( 100 ):",
@@ -107,7 +110,7 @@ def main():
     code1 = CODE.Fragment( "fragment", code_fragment, "python" )
     code1.add_newlines()
 
-    #'''
+    '''
     proc1 = FUN.Process(
         "create_enumerable_set",
         { "name": { "naturals_to_5" },

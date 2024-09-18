@@ -1,5 +1,6 @@
 import globals as G
 import utility as U
+import inspect as I
 from dataclasses import dataclass, field
 from objects_text import Memo
 
@@ -9,7 +10,8 @@ class Fragment( Memo ):
     __type: str = ""
 
     def __init__ ( self, name: str = "", lines: list = [], lang = "", type = "" ):
-        if G.debug == True:
+        if G.debug:
+            print( f"{self.__class__.__name__}.{I.currentframe().f_code.co_name}() called by {I.stack()[1].function}()" )
             print( f"name='{name}'\nlines='{lines[0]}'...\nlang='{lang}'" )
         super().__init__( name, lines, lang )
         self.__type = type

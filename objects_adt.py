@@ -1,5 +1,5 @@
 import globals as G
-
+import inspect as I
 from dataclasses import dataclass, field
 from objects_base import Object
 
@@ -9,7 +9,8 @@ class Set( Object ):
     __type: str = ""
 
     def __init__ ( self, name: str = "", value: set = {}, type: str = "" ):
-        if G.debug == True:
+        if G.debug:
+            print( f"{self.__class__.__name__}.{I.currentframe().f_code.co_name}() called by {I.stack()[1].function}()" )
             print( f"name='{name}'\nlines='{value}'...\nlang='{type}'" )
         super().__init__( name )
         self.__value = value
