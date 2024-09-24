@@ -81,7 +81,7 @@
    },
    "outputs": [],
    "source": [
-    "df = pd.read_csv(\"/data/training.1600000.processed.noemoticon.csv\" ,encoding='iso-8859-1')"
+    "df = pd.read_csv(\"/kaggle/input/sentiment-analysis-dataset/training.1600000.processed.noemoticon.csv\" ,encoding='iso-8859-1')"
    ]
   },
   {
