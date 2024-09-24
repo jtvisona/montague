@@ -46,7 +46,7 @@ def main():
     # objects_base
     # --------------------------------
 
-    """
+    #"""
     # Sentence and regenerating UUID example
     sen1 = TXT.Sentence( "first", "the big house is nearby", "decl" )
     print( str(sen1.uuid) )
@@ -159,7 +159,7 @@ def main():
     print( memo1.to_stringified_lines(), end="" )
     #"""
 
-    """
+    #"""
     # Argument example
     sen1 = ( "S1", "All men are mortal." )
     sen2 = ( "S2", "Socrates is a man." )
@@ -169,7 +169,7 @@ def main():
     concl = TXT.Proposition( "C", sen3 )
 
     arg1 = TXT.Argument( "syllogism", [prop1, prop2], concl )
-    print( arg1.toMultiString() )
+    print( arg1.to_multi_string() )
     #"""
 
     """

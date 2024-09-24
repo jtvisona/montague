@@ -194,8 +194,8 @@ class Argument( Object ):
     def to_multi_string( self ):
         multi_str = ""
         for prop in self.__premises:
-            multi_str += prop.name + ":\t" + prop.val + "\n"
-        multi_str += self.__conclusion.name + ":\t" + self.__conclusion.val + "\n"
+            multi_str += prop.name + ":\t" + str( prop.value ) + "\n"
+        multi_str += self.__conclusion.name + ":\t" + str( self.__conclusion.value ) + "\n"
         return multi_str
 
     # ADD def to_multi_MD( self ):
