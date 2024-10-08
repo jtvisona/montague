@@ -51,7 +51,7 @@ class Application():
 
     def __init__( self, app_root, obj_man ):
         logger.info( "Application.__init__()" )
-        MBOX.showinfo( "Montague", " Montague Tool for Sentiment Analysis" )
+        
         self.__app_root = app_root
         self.__obj_manager = obj_man
         self.__script_string = 'print( "Hello, world!!!" )'
@@ -106,7 +106,9 @@ class Application():
         self.__memo_output = TK.Text( self.__app_root, height=10, width=100 )
         self.__memo_output.pack()
 
-        self.__app_root.mainloop()
+        # Moved to end because allows rendering and makes text entries writable; no idea why
+        MBOX.showinfo( "Montague", " Montague Tool for Sentiment Analysis" )
+        MBOX.showinfo( "Montague", " Version 0.0.1" )
 
     # --------------------------------
     # BUTTON METHODS
