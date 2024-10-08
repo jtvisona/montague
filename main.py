@@ -24,7 +24,7 @@ def main():
     logger.info( 'Creating and initializing tkinter root' )
     app_root = TK.Tk()
     app_root.title( "Montague Tool for Sentiment Analysis" )
-    app_root.geometry( "710x500" )
+    app_root.geometry( "825x525" )
 
     logger.info( "Creating object manager" )
     obj_man = OM.ObjectManager()

@@ -57,54 +57,52 @@ class Application():
         self.__script_string = 'print( "Hello, world!!!" )'
 
         # FRAME
-        self.__frame = TTK.Frame( self.__app_root, padding=self.__padding )
-        self.__frame.pack( fill=TK.BOTH, expand=True )
+        self.__frame = TTK.Frame( self.__app_root, padding=self.__padding ).grid( row=0, column=0 )
 
         # BUTTON: EXIT
         self.__button_exit = TTK.Button( self.__frame, text="Exit Montague", command=self.click_button_exit )
-        self.__button_exit.pack()
 
         # OBJECT SELECTOR
-        TTK.Label( self.__frame, text="Object Selected" ).pack()
+        TTK.Label( self.__frame, text="Object Selected" ).grid( row=0, column=0, padx=5, pady=5, sticky=TK.W )
         self.__entry_text_selection = TK.StringVar()
         self.__entry_text_selection.set( "This is a test." )
-        #self.__entry_text_selection = TTK.Entry( self.__frame, width=25, textvariable=self.__entry_text_selection, state="readonly" )
+        self.__app_root.update()
         self.__entry_text_selection = TTK.Entry( self.__frame, width=25, textvariable=self.__entry_text_selection )
-        self.__entry_text_selection.pack()
+        self.__entry_text_selection.grid( row=0, column=1, padx=5, pady=5, sticky=TK.W )
 
         # BUTTON: LIST OBJECTS
         self.open_subroot_button = TK.Button(self.__app_root, text="List objects", command=self.click_button_open_subroot)
-        self.open_subroot_button.pack()
+        self.open_subroot_button.grid( row=0, column=2, padx=5, pady=5, sticky=TK.W )
 
         # BUTTON: LOAD SCRIPT
         self.__button_load_script = TTK.Button( self.__frame, text="Load script", command=self.click_button_load_script )
-        self.__button_load_script.pack()
+        self.__button_load_script.grid( row=1, column=0, padx=5, pady=5, sticky=TK.W )
 
         # BUTTON: EXECUTE SCRIPT
         self.__button_exec_script = TTK.Button( self.__frame, text="Execute script", command=self.click_button_exec_script )
-        self.__button_exec_script.pack()
+        self.__button_exec_script.grid( row=1, column=1, padx=5, pady=5, sticky=TK.W )
 
         # BUTTON: SAVE OUTPUT
         self.__button_save = TTK.Button( self.__frame, text="Save output", command=self.click_button_save_output )
-        self.__button_save.pack()
+        self.__button_save.grid( row=2, column=0, padx=5, pady=5, sticky=TK.W )
 
         # BUTTON: CLEAR OUTPUT
         self.__button_clear = TTK.Button( self.__frame, text="Clear output", command=self.click_button_clear_memo )
-        self.__button_clear.pack()
+        self.__button_clear.grid( row=2, column=1, padx=5, pady=5, sticky=TK.W )
         
         # ENTRY TEXT: COMMAND
-        TTK.Label( self.__frame, text="Command" ).pack()
+        TTK.Label( self.__frame, text="Command" ).grid( row=3, column=0, padx=5, pady=5, sticky=TK.W )
         self.__entry_command = TK.StringVar()
         self.__entry_command = TTK.Entry( self.__frame, width=25, textvariable=self.__entry_command )
-        self.__entry_command.pack()
+        self.__entry_command.grid( row=3, column=1, padx=5, pady=5, sticky=TK.W )
 
         # BUTTON: EXECUTE COMMAND
         self.__button_exec_command = TTK.Button( self.__frame, text="Execute command", command=self.click_button_exec_command )
-        self.__button_exec_command.pack()
+        self.__button_exec_command.grid( row=3, column=2, padx=5, pady=5, sticky=TK.W )
 
         # MEMO: OUTPUT
-        self.__memo_output = TK.Text( self.__app_root, height=10, width=100 )
-        self.__memo_output.pack()
+        self.__memo_output = TK.Text( self.__app_root, height=20, width=100 )
+        self.__memo_output.grid( row=4, column=0, columnspan=3, padx=5, pady=5, sticky=TK.W )
 
         # Moved to end because allows rendering and makes text entries writable; no idea why
         MBOX.showinfo( "Montague", " Montague Tool for Sentiment Analysis" )
@@ -132,14 +130,15 @@ class Application():
         self.__script_string = "printf( \"Hello, world!!!\" )"
 
     def click_button_exec_script( self ):
-        #exec( )
         output = "Script executed"
+        self.__memo_output.delete( "1.0", "end" )
         self.__memo_output.insert( TK.END, output )
 
     def click_button_exec_command( self ):
-        #exec( )
-        output = "Script executed"
+        output = "Command executed"
+        self.__memo_output.delete( "1.0", "end" )
         self.__memo_output.insert( TK.END, output )
+
 
     def click_button_save_output( self ):
         memo_content = self.__memo_output.get("1.0", TK.END).strip()
