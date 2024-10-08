@@ -7,6 +7,7 @@ jtvisona can be emailed at yahoo com
 """
 
 #https://docs.python.org/3/library/logging.html
+
 import montague as MGUE
 import object_man as OM
 import tkinter as TK
@@ -22,8 +23,8 @@ def main():
     
     logger.info( 'Creating and initializing tkinter root' )
     app_root = TK.Tk()
-    app_root.title( "Montague" )
-    app_root.geometry( "600x500" )
+    app_root.title( "Montague Tool for Sentiment Analysis" )
+    app_root.geometry( "710x500" )
 
     logger.info( "Creating object manager" )
     obj_man = OM.ObjectManager()
