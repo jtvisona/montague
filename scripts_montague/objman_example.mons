@@ -1,0 +1,9 @@
+# obj_man.copy_obj( key ) examples
+sen1 = TXT.Sentence( "first", "the big house is nearby", "decl" )
+print( U.flag_main( f"{sen1.to_string()=}" ) )
+obj_man.add_object( sen1 )
+print( U.flag_main( f"{obj_man.list_keys()=}" ) )
+print( U.flag_main( f"{obj_man.stringified_list_keys()=}" ) )
+print( U.flag_main( f"{obj_man.annotated_list_keys()=}" ) )
+obj_man.copy_obj( sen1 )
+print( U.flag_main( f"{obj_man.annotated_list_keys()=}" ) )

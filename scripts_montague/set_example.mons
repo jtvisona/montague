@@ -1,0 +1,12 @@
+# Set example
+## 'create var'
+output = ""
+## 'create set'
+set1 = ADT.Set( "TestSet", {3,4,5,1}, "whole" )
+## 'display set'
+for each_value in list( set1.value ):
+    output += "'" + str( each_value ) + "' "
+output += "\n"
+## 'tostring set'
+output += set1.to_string()
+self.__memo_output.insert( TK.END, output )

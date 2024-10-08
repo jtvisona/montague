@@ -1,0 +1,9 @@
+proc1 = FUN.Process( "function_call",
+    { "first_arg": { "number" },
+        "second_arg" : { "proposition" },
+        "third_arg" : { "set" }
+    },
+    "DO Sobj_manE STUFF"
+)
+#print( proc1.to_string() )
+#print( proc1.toPython() )

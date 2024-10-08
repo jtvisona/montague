@@ -1,0 +1,6 @@
+sen1 = TXT.Sentence( "first", "the big house is nearby", "decl" )
+print( sen1.value )
+sen1.to_cap_and_stop()
+print( sen1.value )
+sen1.to_uncap_and_drop()
+print( sen1.value )

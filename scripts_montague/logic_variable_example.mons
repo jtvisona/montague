@@ -1,0 +1,3 @@
+var1 = LOGIC.Variable( "x", "length" )
+var1.setVal( set1 )
+print( var1.to_string() )

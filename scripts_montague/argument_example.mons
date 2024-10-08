@@ -1,0 +1,10 @@
+# Argument example
+sen1 = ( "S1", "All men are mortal." )
+sen2 = ( "S2", "Socrates is a man." )
+sen3 = ( "S3", "Socrates is mortal." )
+prop1 = TXT.Proposition( "P1", sen1 )
+prop2 = TXT.Proposition( "P2", sen2 )
+concl = TXT.Proposition( "C", sen3 )
+
+arg1 = TXT.Argument( "syllogism", [prop1, prop2], concl )
+print( arg1.to_multi_string() )

@@ -1,0 +1,5 @@
+# Proposition example
+sen1 = TXT.Sentence( "example", "Die Gedanken sind Frei.", "german")
+prop1 = TXT.Proposition( "P", sen1, True )
+print( prop1.stringify_sentence() )
+print( prop1.stringify_appraised_truth_cond() )

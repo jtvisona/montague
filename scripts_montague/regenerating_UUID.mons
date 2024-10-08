@@ -1,0 +1,4 @@
+sen1 = TXT.Sentence( "first", "the big house is nearby", "decl" )
+print( str(sen1.uuid) )
+sen1.regen_uuid()
+print( str(sen1.uuid) )

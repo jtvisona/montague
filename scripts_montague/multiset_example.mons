@@ -1,0 +1,8 @@
+# Multiset example
+mset1 = ADT.Multiset( "TestSet", [3,4,5,1,1], "whole" )
+#for each_value in list( mset1.value ):
+#    print( "'" + str( each_value ) + "'", end= " " )
+#print()
+print( mset1.to_stringified_list() )
+#print( mset1.to_string() )
+    

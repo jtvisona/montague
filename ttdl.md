@@ -1,3 +1,4 @@
+### General
 - [x] Create object superclass so that all objects inherit
 - [x] Finish integrating all objects with Object superclass
 - [ ] Automate toString() generation
@@ -17,5 +18,6 @@
 - [ ] Specify all return types (type hints)
 - [ ] Add if G.debug: to all methods
 
+### GUI
 - [ ] Can abstract window object to have multiple roots running
-- [ ]
+- [ ] Abstract each tkinter component to its own object class so don't have to hardcode widgets

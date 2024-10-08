@@ -1,0 +1,19 @@
+# Process with Fragment example
+code_fragment = [   "my_set = {  }",
+                    "for each_natural in range( 100 ):",
+                    "  my_set.add( each_natural )" ]
+code1 = CODE.Fragment( "fragment", code_fragment, "python" )
+code1.add_newlines()
+
+'''
+proc1 = FUN.Process(
+    "create_enumerable_set",
+    { "name": { "naturals_to_5" },
+        "type" : { "naturals" },
+        "max" : { "5" }
+    },
+    code1        
+)
+print( proc1.to_string() )
+#print( proc1.to_python() )
+#'''

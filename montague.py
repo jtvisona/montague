@@ -13,7 +13,7 @@ import object_man as OM
 import tkinter as TK
 from tkinter import ttk as TTK, messagebox as MBOX
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 import objects_adt as ADT
 import objects_base as BASE
@@ -29,22 +29,29 @@ class Montague():
     __app_root = ""
     __frame = ""
     __padding = "15 15 15 15"
-    __entry_text_selection = ""
+    __entry_text_selection : str = field( default_factory=str )
     __button_exit = ""
-    __button_script = ""
+    __button_load_script = ""
+    __button_exec_script = ""
     __button_save = ""
     __button_clear = ""
-    __entry_text1 = ""
-    __memo_output = ""
+    __entry_command : str = field( default_factory=str )
+    __memo_output : str = field( default_factory=str )
 
+    # put pointer to current object in manager
     __obj_manager = ""
+
+    # script management
+    __current_script = "/scripts_montague/set_example.py"
+    __script_string : str = field( default_factory=str )
 
     def __init__( self, root, obj_man ):
         # SPLASH
-        MBOX.showinfo( "Montague", "Welcome to the Montague Formal System Tool" )
+        MBOX.showinfo( "Montague", "Welcome to the Montague Formal System Tool for Sentiment Analysis" )
 
         self.__app_root = root
         self.__obj_manager = obj_man
+        self.__script_string = "print"
 
         # FRAME
         self.__frame = TTK.Frame( self.__app_root, padding=self.__padding )
@@ -62,9 +69,17 @@ class Montague():
         self.__entry_text_selection = TTK.Entry( self.__frame, width=25, textvariable=self.__entry_text_selection )
         self.__entry_text_selection.pack()
 
+        # BUTTON: LIST OBJECTS
+        self.open_subroot_button = TK.Button(root, text="List objects", command=self.click_button_open_subroot)
+        self.open_subroot_button.pack()
+
+        # BUTTON: LOAD SCRIPT
+        self.__button_load_script = TTK.Button( self.__frame, text="Load script", command=self.click_button_load_script )
+        self.__button_load_script.pack()
+
         # BUTTON: EXECUTE SCRIPT
-        self.__button_script = TTK.Button( self.__frame, text="Execute script", command=self.click_button_script )
-        self.__button_script.pack()
+        self.__button_exec_script = TTK.Button( self.__frame, text="Execute script", command=self.click_button_exec_script )
+        self.__button_exec_script.pack()
 
         # BUTTON: SAVE OUTPUT
         self.__button_save = TTK.Button( self.__frame, text="Save output", command=self.click_button_save_output )
@@ -76,9 +91,9 @@ class Montague():
         
         # ENTRY TEXT: COMMAND
         TTK.Label( self.__frame, text="Command" ).pack()
-        self.__entry_text1 = TK.StringVar()
-        self.__entry_text1 = TTK.Entry( self.__frame, width=25, textvariable=self.__entry_text1 )
-        self.__entry_text1.pack()
+        self.__entry_command = TK.StringVar()
+        self.__entry_command = TTK.Entry( self.__frame, width=25, textvariable=self.__entry_command )
+        self.__entry_command.pack()
 
         # MEMO: OUTPUT
         self.__memo_output = TK.Text(root, height=10, width=100)
@@ -88,21 +103,29 @@ class Montague():
     # BUTTON METHODS
     # --------------------------------
 
-    def click_button_script( self ):
-        # Set example
-        ## 'create var'
-        output = ""
-        ## 'create set'
-        set1 = ADT.Set( "TestSet", {3,4,5,1}, "whole" )
-        ## 'display set'
-        for each_value in list( set1.value ):
-            output += "'" + str( each_value ) + "' "
-        output += "\n"
-        ## 'tostring set'
-        output += set1.to_string()
+    def click_button_open_subroot( self ):
+        subroot = TK.Toplevel( self.__app_root )
+        subroot.title("List Objects")
+
+    def click_button_save_output( self ):
+        memo_content = self.__memo_output.get("1.0", TK.END).strip()
+        if memo_content:
+            with open("output.txt", "w") as file:
+                file.write( memo_content )
+            MBOX.showinfo("Success", "Output from script saved successfully!")
+        else:
+            MBOX.showwarning("Input Error", "There is no output to save.")
+
+    def click_button_load_script( self ):
+        #MBOX.WARNING( "Loading script!" )
+        MBOX.showwarning( "Loading script!", f"Loading script: {self.__current_script}" )
+        self.__script_string = "printf( \"Hello, world!!!\" )"
+
+    def click_button_exec_script( self ):
+        exec( )
+        output = "Script executed"
         self.__memo_output.insert( TK.END, output )
 
-    
     def click_button_save_output( self ):
         memo_content = self.__memo_output.get("1.0", TK.END).strip()
         if memo_content:
