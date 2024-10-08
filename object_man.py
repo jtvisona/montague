@@ -26,7 +26,7 @@ class ObjectManager:
     __object_list : dict = field( default_factory=dict )
 
     def __init__( self ):
-        
+        logger.info( "ObjectManager.__init__()" )
         self.__object_list = []
 
     @property

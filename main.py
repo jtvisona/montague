@@ -16,7 +16,7 @@ logger = logging.getLogger( __name__ )
 def main():
 
     logging.basicConfig( filename='montague.log', level=logging.DEBUG, filemode="w", encoding="utf-8",
-                        format="%(asctime)s %(levelname)10s - %(message)s" )
+                        format="%(asctime)s:%(levelname)s:%(module)s - %(message)s" )
     logger.info( 'main()' )
     logger.info( 'Montague starting' )
     
