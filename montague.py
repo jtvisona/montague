@@ -1,12 +1,19 @@
 """
 Montague is an object-manipulation framework designed to support encoding arbitary formal systems.
 It is named after Richard Montague, who along with Barbara Partee and others, advanced linguisitc formal semantics.
-    by Jonathan Visona 
-    email jtvisona yahoo.com
+
+by Jonathan Visona 
+jtvisona can be emailed at yahoo com
 """
 
 import utility as U
+import sys as SYS
 import object_man as OM
+
+import tkinter as TK
+from tkinter import ttk as TTK, messagebox as MBOX
+
+from dataclasses import dataclass
 
 import objects_adt as ADT
 import objects_base as BASE
@@ -15,187 +22,122 @@ import objects_function as FUN
 import objects_logic as LOGIC
 import objects_text as TXT
 
+@dataclass
+class Montague():
+
+    # For tkinter root
+    __app_root = ""
+    __frame = ""
+    __padding = "15 15 15 15"
+    __entry_text_selection = ""
+    __button_exit = ""
+    __button_script = ""
+    __button_save = ""
+    __button_clear = ""
+    __entry_text1 = ""
+    __memo_output = ""
+
+    __obj_manager = ""
+
+    def __init__( self, root, obj_man ):
+        # SPLASH
+        MBOX.showinfo( "Montague", "Welcome to the Montague Formal System Tool" )
+
+        self.__app_root = root
+        self.__obj_manager = obj_man
+
+        # FRAME
+        self.__frame = TTK.Frame( self.__app_root, padding=self.__padding )
+        self.__frame.pack( fill=TK.BOTH, expand=True )
+
+        # BUTTON: EXIT
+        self.__button_exit = TTK.Button( self.__frame, text="Exit Montague", command=self.click_button_exit )
+        self.__button_exit.pack()
+
+        # OBJECT SELECTOR
+        TTK.Label( self.__frame, text="Object Selected" ).pack()
+        self.__entry_text_selection = TK.StringVar()
+        self.__entry_text_selection.set( "This is a test." )
+        #self.__entry_text_selection = TTK.Entry( self.__frame, width=25, textvariable=self.__entry_text_selection, state="readonly" )
+        self.__entry_text_selection = TTK.Entry( self.__frame, width=25, textvariable=self.__entry_text_selection )
+        self.__entry_text_selection.pack()
+
+        # BUTTON: EXECUTE SCRIPT
+        self.__button_script = TTK.Button( self.__frame, text="Execute script", command=self.click_button_script )
+        self.__button_script.pack()
+
+        # BUTTON: SAVE OUTPUT
+        self.__button_save = TTK.Button( self.__frame, text="Save output", command=self.click_button_save_output )
+        self.__button_save.pack()
+
+        # BUTTON: CLEAR OUTPUT
+        self.__button_clear = TTK.Button( self.__frame, text="Clear output", command=self.click_button_clear_memo )
+        self.__button_clear.pack()
+        
+        # ENTRY TEXT: COMMAND
+        TTK.Label( self.__frame, text="Command" ).pack()
+        self.__entry_text1 = TK.StringVar()
+        self.__entry_text1 = TTK.Entry( self.__frame, width=25, textvariable=self.__entry_text1 )
+        self.__entry_text1.pack()
+
+        # MEMO: OUTPUT
+        self.__memo_output = TK.Text(root, height=10, width=100)
+        self.__memo_output.pack()
+
+    # --------------------------------
+    # BUTTON METHODS
+    # --------------------------------
+
+    def click_button_script( self ):
+        # Set example
+        ## 'create var'
+        output = ""
+        ## 'create set'
+        set1 = ADT.Set( "TestSet", {3,4,5,1}, "whole" )
+        ## 'display set'
+        for each_value in list( set1.value ):
+            output += "'" + str( each_value ) + "' "
+        output += "\n"
+        ## 'tostring set'
+        output += set1.to_string()
+        self.__memo_output.insert( TK.END, output )
+
+    
+    def click_button_save_output( self ):
+        memo_content = self.__memo_output.get("1.0", TK.END).strip()
+        if memo_content:
+            with open("output.txt", "w") as file:
+                file.write( memo_content )
+            MBOX.showinfo("Success", "Output from script saved successfully!")
+        else:
+            MBOX.showwarning("Input Error", "There is no output to save.")
+
+    def click_button_clear_memo( self ):
+        #self.__memo_output.clipboard_get
+        #self.__memo_output.destroy()
+        self.__memo_output.delete( "1.0", "end" )
+
+    def click_button_exit( self ):
+        #self.__app_root.title( """ )
+        self.__app_root.destroy()
+
 def main():
-    print( "\n******** Executing Montague\n" )
-    obj_man = OM.ObjectManager()
-    
-    # --------------------------------
-    # objects_adt
-    # --------------------------------
 
-    """
-    # Set example
-    set1 = ADT.Set( "TestSet", {3,4,5,1}, "whole" )
-    for each_value in list( set1.value ):
-        print( "'" + str( each_value ) + "'", end= " " )
-    print()
-    print( set1.to_string() )
-    #"""
+    print( "\n******** Creating and configuring tkinter root" )
+    app_root = TK.Tk()
+    app_root.title( "Montague" )
+    app_root.geometry( "600x500" )
 
-    """
-    # Multiset example
-    mset1 = ADT.Multiset( "TestSet", [3,4,5,1,1], "whole" )
-    #for each_value in list( mset1.value ):
-    #    print( "'" + str( each_value ) + "'", end= " " )
-    #print()
-    print( mset1.to_stringified_list() )
-    #print( mset1.to_string() )
-    #"""
+    print( "******** Creating object manager" )
+    #obj_man = OM.ObjectManager()
+    obj_man = "obj_man"
 
-    # --------------------------------
-    # objects_base
-    # --------------------------------
+    print( "******** Creating Montague application\n" )
+    m = Montague( app_root, obj_man )
 
-    #"""
-    # Sentence and regenerating UUID example
-    sen1 = TXT.Sentence( "first", "the big house is nearby", "decl" )
-    print( str(sen1.uuid) )
-    sen1.regen_uuid()
-    print( str(sen1.uuid) )
-    #"""
-
-    #"""
-    # obj_man.copy_obj( key ) examples
-    sen1 = TXT.Sentence( "first", "the big house is nearby", "decl" )
-    print( U.flag_main( f"{sen1.to_string()=}" ) )
-    obj_man.add_object( sen1 )
-    print( U.flag_main( f"{obj_man.list_keys()=}" ) )
-    print( U.flag_main( f"{obj_man.stringified_list_keys()=}" ) )
-    print( U.flag_main( f"{obj_man.annotated_list_keys()=}" ) )
-    obj_man.copy_obj( sen1 )
-    print( U.flag_main( f"{obj_man.annotated_list_keys()=}" ) )
-    #"""
-
-    # --------------------------------
-    # objects_code
-    # --------------------------------
-
-    """"
-    # Fragment example
-    code_fragment = [   "my_set = { 1, 2, 3 }",
-                        "for each_element in my_set:",
-                        "  print( each_element )" ]
-    code1 = CODE.Fragment( "fragment", code_fragment, "python" )
-    code1.add_newlines()
-    print( f"has_newlines()={code1.has_newlines()}" )
-    print( code1.concat_and_stringify_lines() )
-    exec( code1.concat_and_stringify_lines() )
-    code1.remove_newlines()
-    
-    print( code1.value )
-
-    #"""
-
-    # --------------------------------
-    # objects_function
-    # --------------------------------
-     
-    """
-    proc1 = FUN.Process( "function_call",
-        { "first_arg": { "number" },
-            "second_arg" : { "proposition" },
-            "third_arg" : { "set" }
-        },
-        "DO Sobj_manE STUFF"
-    )
-    #print( proc1.to_string() )
-    #print( proc1.toPython() )
-    #"""
-
-    """
-    # Process with Fragment example
-    code_fragment = [   "my_set = {  }",
-                        "for each_natural in range( 100 ):",
-                        "  my_set.add( each_natural )" ]
-    code1 = CODE.Fragment( "fragment", code_fragment, "python" )
-    code1.add_newlines()
-
-    '''
-    proc1 = FUN.Process(
-        "create_enumerable_set",
-        { "name": { "naturals_to_5" },
-            "type" : { "naturals" },
-            "max" : { "5" }
-        },
-        code1        
-    )
-    print( proc1.to_string() )
-    #print( proc1.to_python() )
-    #'''
-    #"""
-
-    # --------------------------------
-    # objects_logic
-    # --------------------------------
-
-    """
-    var1 = LOGIC.Variable( "x", "length" )
-    var1.setVal( set1 )
-    print( var1.to_string() )
-    #"""
-
-    # --------------------------------
-    # objects_text
-    # --------------------------------
-
-    """
-    # Phrase and Sentence examples
-    sen1 = TXT.Sentence( "first", "the big house is nearby", "decl" )
-    print( sen1.value )
-    sen1.to_cap_and_stop()
-    print( sen1.value )
-    sen1.to_uncap_and_drop()
-    print( sen1.value )
-    #"""
-    
-    """
-    # Memo example
-    lines = [ "This is a test of the EBS.", \
-        "This is only a test.",
-        "If this were a real emergency..." ]
-    memo1 = TXT.Memo( "test", lines )
-    #print( memo1.to_string() )
-    #print( memo1.to_stringified_list() )
-    print( memo1.to_stringified_lines(), end="" )
-    #"""
-
-    #"""
-    # Argument example
-    sen1 = ( "S1", "All men are mortal." )
-    sen2 = ( "S2", "Socrates is a man." )
-    sen3 = ( "S3", "Socrates is mortal." )
-    prop1 = TXT.Proposition( "P1", sen1 )
-    prop2 = TXT.Proposition( "P2", sen2 )
-    concl = TXT.Proposition( "C", sen3 )
-
-    arg1 = TXT.Argument( "syllogism", [prop1, prop2], concl )
-    print( arg1.to_multi_string() )
-    #"""
-
-    """
-    # Proposition example
-    sen1 = TXT.Sentence( "example", "Die Gedanken sind Frei.", "german")
-    prop1 = TXT.Proposition( "P", sen1, True )
-    print( prop1.stringify_sentence() )
-    print( prop1.stringify_appraised_truth_cond() )
-    #"""
-
-    """
-    # Proposition examples
-    sen1 = TXT.Proposition( "S1", "All men are mortal." )
-    sen2 = TXT.Proposition( "S2", "Socrates is a man." )
-    prop1 = TXT.Proposition( "P1", sen1 )
-    prop2 = TXT.Proposition( "P2", sen2 )
-    print( prop1.stringify_sentence() )
-    print( prop2.stringify_sentence() )
-
-    # print( obj_man.list_keys() )
-    #print( obj_man.get_val_by_key( prop2.get_uuid_str() ) )
-    #print( obj_man.get_size() )
-    #obj_man.pop_object( prop2 )
-    #print( obj_man.object_list )
-
-    #"""
+    print( "******** Invoking the Montague mainloop()" )
+    app_root.mainloop()
+    SYS.exit()
 
 # if this module is called first, call the main function
 if __name__ == "__main__":

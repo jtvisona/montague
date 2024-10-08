@@ -4,9 +4,9 @@
 - [ ] Automate object generation
 - [x] Reverse number_objects to objects_numbers, etc.
 - [x] Add types to all function calls
-- [x] Eliminate all camel case
+- [x] Eliminate all camel case except for object names
 - [ ] Write unit tests
-- [ ] Refactor: f"{var}" -> var
+- [x] Refactor: f"{var}" -> var
 - [ ] Move object registration into constructor?
 - [ ] Investigate https://devcenter.heroku.com/
 - [ ] Integrate object storage to SQLLite or PostGres
@@ -14,5 +14,8 @@
 - [ ] Add code object and create_github_wiki entry 
 - [ ] Create Montague Markup Language
 - [ ] Fix inspect calls
-- [ ] Specify all return types
+- [ ] Specify all return types (type hints)
 - [ ] Add if G.debug: to all methods
+
+- [ ] Can abstract window object to have multiple roots running
+- [ ]

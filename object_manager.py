@@ -1,4 +1,6 @@
 from dataclasses import dataclass, field
+#import tkinter as tk
+#from tkinter import messagebox
 
 # ----------------------------------------------------------------
 # OBJECTMANAGER
@@ -10,15 +12,15 @@ Keeps track of metadata about all objects that have been instanticated
 
 @dataclass
 class ObjectManager:
-    __objectList : dict = field( default_factory=dict )
+    __object_list : dict = field( default_factory=dict )
 
     def __init__():
         print( "Creating ObjectManager" )
-        __objectList = []
+        __object_list = []
 
-    def addObject( self, obj ):
-        self.__objectList[ obj.uuid ] = obj
+    def add_object( self, obj ):
+        self.__object_list[ obj.uuid ] = obj
     
-    def objectList( self ):
-        print( self.__objectList )
+    def object_list( self ):
+        print( self.__object_list )
         return "yay"
