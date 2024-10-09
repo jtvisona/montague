@@ -31,7 +31,7 @@ class ObjectManager:
 
     @property
     def object_list( self ):
-        return self.__obj_register
+        return self.__object_list
 
     def add_object( self, obj: object ) -> bool:
         self.__object_list[ obj.uuid ] = obj

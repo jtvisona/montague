@@ -8,7 +8,7 @@ class Interpreter:
     _history : list = field( default_factory=list )
 
     def __init__( self ):
-        logger.debug( "Called" )
+        logger.info( "Called" )
         self._history = []
 
     def process_command( self, command: str ) -> str :
