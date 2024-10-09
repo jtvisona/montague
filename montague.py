@@ -29,6 +29,7 @@ class Application( Object ):
 
     _entry_text_selection : str = field( default_factory=str )
     _entry_command : str = field( default_factory=str )
+    _entry_script : str = field( default_factory=str )
     _memo_output : str = field( default_factory=str )
 
     # put pointer to current object in manager
@@ -83,10 +84,15 @@ class Application( Object ):
         # BUTTON: LOAD SCRIPT
         self._button_load_script = TTK.Button( self._frame, text="Load script", command=self.click_button_load_script )
         self._button_load_script.grid( row=current_row, column=0, padx=5, pady=5, sticky=TK.W )
+        
+        # ENTRY TEXT: SCRIPT
+        self._entry_script = TK.StringVar()
+        self._entry_script = TTK.Entry( self._frame, width=25, textvariable=self._entry_script )
+        self._entry_script.grid( row=current_row, column=1, padx=5, pady=5, sticky=TK.W )
 
         # BUTTON: EXECUTE SCRIPT
         self._button_exec_script = TTK.Button( self._frame, text="Execute script", command=self.click_button_exec_script )
-        self._button_exec_script.grid( row=current_row, column=1, padx=5, pady=5, sticky=TK.W )
+        self._button_exec_script.grid( row=current_row, column=2, padx=5, pady=5, sticky=TK.W )
 
         # --------
         # ROW 2
@@ -136,6 +142,8 @@ class Application( Object ):
     # BUTTON METHODS
     # --------------------------------
 
+    # NB Don't forget to use .get() on text_entries
+
     def click_button_open_subroot( self ):
         subroot = TK.Toplevel( self._app_root )
         subroot.title( "List Objects" )
@@ -145,19 +153,18 @@ class Application( Object ):
         if memo_content:
             with open("output.txt", "w") as file:
                 file.write( memo_content )
-            MBOX.showinfo("Success", "Output from script saved successfully!")
+            MBOX.showinfo( "Success", "Output from script saved successfully!" )
         else:
             MBOX.showwarning("Input Error", "There is no output to save.")
 
     def click_button_load_script( self ):
-        MBOX.showwarning( "Loading script!", f"Loading script: {self._current_script}" )
-        self._script_string = 'printf( "Hello, world!!!" )'
+        MBOX.showwarning( "Loading script!", f"Loading script: {self._entry_script.get()}" )
 
     def click_button_exec_script( self ):
-        output = "Script executed"
+        output = f"{self._entry_script.get()} executed"
         self._memo_output.delete( "1.0", "end" )
         self._memo_output.insert( TK.END, output )
-###
+
     def click_button_exec_command( self ):
         output = ""
         self._memo_output.delete( "1.0", "end" )
