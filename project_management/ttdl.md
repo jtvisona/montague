@@ -17,6 +17,7 @@
 - [ ] Fix inspect calls
 - [ ] Specify all return types (type hints)
 - [ ] Add if G.debug: to all methods
+- [ ] Ensure all objects are derived from Object
 
 ### GUI
 - [ ] Can abstract window object to have multiple roots running
