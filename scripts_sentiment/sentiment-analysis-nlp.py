@@ -136,7 +136,12 @@ print(len(stopword))
 nltk.download('wordnet')
 
 # %%
-!unzip /usr/share/nltk_data/corpora/wordnet.zip -d /usr/share/nltk_data/corpora/
+# jtv - this bang is problematic; wonder why it's here from the export?
+# !unzip /usr/share/nltk_data/corpora/wordnet.zip -d /usr/share/nltk_data/corpora/
+# added import, but need to 
+import unzip
+# https://ioflood.com/blog/python-unzip/
+#unzip "/usr/share/nltk_data/corpora/wordnet.zip -d /usr/share/nltk_data/corpora/
 
 # %%
 df.columns
@@ -189,6 +194,10 @@ Xt = tfid.fit_transform(X)
 # from collections import Counter
 # print('Original dataset shape {}'.format(Counter(Y)))
 # print('Resampled dataset shape {}'.format(Counter(y_res)))
+
+"""
+2024-10-09 The 'sklearn' PyPI package is deprecated, use 'scikit-learn' rather than 'sklearn' for pip commands.
+"""
 
 # %%
 from sklearn.model_selection import train_test_split

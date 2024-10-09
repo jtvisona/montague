@@ -11,6 +11,18 @@ class Interpreter:
         logger.info( "Called" )
         self._history = []
 
+    @property
+    def history( self ) -> list:
+        return self._history
+
+    # Setter for age
+    @history.setter
+    def history( self, value ):
+        if type( value ) == list:
+            self._history = value
+        else:
+            raise ValueError( "Interpreter._history must be list" )
+
     def process_command( self, command: str ) -> str :
         logger.debug( "Called" )
         logger.info( f"Appending '{command}' to history" )
@@ -27,17 +39,19 @@ class Interpreter:
         elif command == "help":
             output = 'test - verify that the interpreter is functioning\n' +\
                 'clear history - clears the history list\n' +\
-                'show history - provides a list of all the commands that have been entered' +\
-                'help - this menu'
+                'show history - provides a list of all the commands that have been entered\n' +\
+                'help - this menu\n'
         else:
             output = "command unrecognized"
         return output
 
     def show_history( self ) -> str :
         logger.debug( "Called" )
-        history = str( self._history )
+        history = ""
+        for each_entry in self._history:
+            history += each_entry + "\n"
         return history
-    
+
     def clear_history( self ) -> bool :
         logger.debug( "Called" )
         success_flag = True
