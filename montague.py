@@ -7,13 +7,14 @@ logger = logging.getLogger( __name__ )
 
 # montague imports
 import objects_interpreters as INT
+from objects_base import Object
 
 # ----------------------------------------------------------------
 # APPLICATION
 # ----------------------------------------------------------------
 
 @dataclass
-class Application:
+class Application( Object ):
 
     # For tkinter root
     _app_root = ""
@@ -99,9 +100,8 @@ class Application:
         self._memo_output = TK.Text( self._app_root, height=20, width=100 )
         self._memo_output.grid( row=4, column=0, columnspan=3, padx=5, pady=5, sticky=TK.W )
 
-        # Moved to end because allows rendering and makes text entries writable; no idea why
-        MBOX.showinfo( "Montague", " Montague Tool for Sentiment Analysis" )
-        MBOX.showinfo( "Montague", " Version 0.0.1" )
+        # Maybe make About button?
+        #MBOX.showinfo( "Montague", "Montague Tool for Sentiment Analysis" )
 
     # --------------------------------
     # BUTTON METHODS
