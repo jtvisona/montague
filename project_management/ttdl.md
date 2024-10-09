@@ -22,3 +22,4 @@
 ### GUI
 - [ ] Can abstract window object to have multiple roots running
 - [ ] Abstract each tkinter component to its own object class so don't have to hardcode widgets
+- [ ] Convert everything to named arguments

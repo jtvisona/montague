@@ -1,4 +1,5 @@
 # utility imports
+import utility as U
 import tkinter as TK
 from tkinter import ttk as TTK, messagebox as MBOX
 from dataclasses import dataclass, field
@@ -26,6 +27,7 @@ class Application( Object ):
     _button_save = ""
     _button_clear = ""
     _button_exec_command = ""
+    _button_show_log = ""
 
     _entry_text_selection : str = field( default_factory=str )
     _entry_command : str = field( default_factory=str )
@@ -124,6 +126,10 @@ class Application( Object ):
         self._button_clear = TTK.Button( self._frame, text="Clear output", command=self.click_button_clear_memo )
         self._button_clear.grid( row=current_row, column=1, padx=5, pady=5, sticky=TK.W )
 
+        # BUTTON: SHOW LOG
+        self._button_show_log = TTK.Button( self._frame, text="Show log", command=self.click_button_show_log )
+        self._button_show_log.grid( row=current_row, column=2, padx=5, pady=5, sticky=TK.W )
+
         # --------
         # ROW 4
         # --------
@@ -158,7 +164,15 @@ class Application( Object ):
             MBOX.showwarning("Input Error", "There is no output to save.")
 
     def click_button_load_script( self ):
-        MBOX.showwarning( "Loading script!", f"Loading script: {self._entry_script.get()}" )
+        #MBOX.showwarning( "Loading script!", f"Loading script: {self._entry_script.get()}" )
+        # pull from globals eventually; hardcoded for now
+        path_and_file = 'C:\\Users\\17082\\Documents\\github-repos\\montague\\' + self._entry_script.get()
+        logger.debug( f"location of file:{path_and_file=}" )
+        # redirect output to child window eventually
+        # add try-except
+        output = U.read_file_to_text( path_and_file )
+        logger.debug( f"size of file:{len(output)=}" )
+        self._memo_output.insert( TK.END, output ) 
 
     def click_button_exec_script( self ):
         output = f"{self._entry_script.get()} executed"
@@ -180,6 +194,16 @@ class Application( Object ):
             MBOX.showinfo("Success", "Output from script saved successfully!")
         else:
             MBOX.showwarning("Input Error", "There is no output to save.")
+
+    def click_button_show_log( self ):
+        # pull from globals eventually; hardcoded for now
+        path_and_file = 'C:\\Users\\17082\\Documents\\github-repos\\montague\\montague.log'
+        logger.debug( f"location of file:{path_and_file=}" )
+        # redirect output to child window eventually
+        # add try-except
+        output = U.read_file_to_text( path_and_file )
+        logger.debug( f"size of file:{len(output)=}" )
+        self._memo_output.insert( TK.END, output ) 
 
     def click_button_clear_memo( self ):
         #self._memo_output.clipboard_get

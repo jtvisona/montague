@@ -8,6 +8,7 @@ jtvisona can be emailed at yahoo com
 
 # utility imports
 #import sys
+import os as OS
 import tkinter as TK
 # https://docs.python.org/3/library/logging.html
 import logging as LOG
@@ -24,12 +25,19 @@ import objects_interpreters as INT
 # ----------------------------------------------------------------
 
 def main():
-    # Adjust logging level here
-    #logging_level = LOG.DEBUG
-    logging_level = LOG.INFO
+    '''
+    Setup logging, and grab environmental parameters and write to the global dictionaries
+    '''
+    # Adjust logging level here; move to G_MAIN
+    logging_level = LOG.DEBUG
+    #logging_level = LOG.INFO
     LOG.basicConfig( filename='montague.log', level=logging_level, filemode="w", encoding="utf-8",
                         format="%(asctime)s:%(levelname)s:%(module)s:%(funcName)s - %(message)s" )
     log.info( 'Montague starting: logging configured' )
+    current_dir = OS.getcwd()
+    G_MAIN["APP_CURRENT_DIR"] = current_dir + "\\"
+    log.info( f'\'{current_dir}\' assigned to G_MAIN["APP_CURRENT_DIR"]' )
+    # add 'view log' command
 
     log.info( 'Creating and initializing tkinter root' )
     app_root = TK.Tk()

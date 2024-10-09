@@ -1,20 +1,65 @@
+import logging as LOG
+log = LOG.getLogger( __name__ )
+
 # ----------------------------------------------------------------
 # WRITE_TEXT_TO_FILE
 # ----------------------------------------------------------------
-def write_text_to_file( text, filename ):
-    pass
+
+"""
+EXAMPLE
+    cur_dir = os.getcwd()
+    print( f"{cur_dir=}" )
+    text = "empty"
+    text2 = "We all live on a yellow submarine.\n"
+    tmp_filename = "test.txt"
+    path_and_file = filename = cur_dir + "\\" + tmp_filename
+    utility.write_text_to_file( text2, path_and_file )
+"""
+
+def write_text_to_file( text: str = "", path_and_filename: str = "" ):
+    log.debug( f"'{text[:5]=}'... {path_and_filename=}" )
+    #print( f"'{text[:5]=}'... {path_and_filename=}" )
+
+    try:
+        with open( path_and_filename, "w" ) as file:
+            file.write( text )
+    except:
+        log.error( f"Failed to write {path_and_filename}" )
 
 # ----------------------------------------------------------------
 # READ_FILE_TO_TEXT
 # ----------------------------------------------------------------
-def read_file_to_text( filename ):
-    pass
+
+"""
+EXAMPLE
+    cur_dir = os.getcwd()
+    print( f"{cur_dir=}" )
+    text = "empty"
+    text2 = "We all live on a yellow submarine.\n"
+    tmp_filename = "test.txt"
+    path_and_file = filename = cur_dir + "\\" + tmp_filename
+    text = U.read_file_to_text( path_and_file )
+    print( text )
+"""
+
+def read_file_to_text( path_and_filename: str ):
+    log.debug( f"{path_and_filename=}" )
+    #print( f"{path_and_filename=}" )
+    
+    text=""
+    try:
+        with open( path_and_filename ) as file:
+            text = file.read()
+    except:
+        log.error( f"Failed to read {path_and_filename}" )
+    return text
 
 # ----------------------------------------------------------------
 # GET_SUBSTRING
 # ----------------------------------------------------------------
 """
 Takes a string as a starting delimitter and ending delimitter and returns the substring between
+
 EXAMPLE:
 
     import utility as U
