@@ -1,5 +1,6 @@
 # utility imports
-import utility as U
+import io as IO
+import sys as SYS
 import tkinter as TK
 from tkinter import ttk as TTK, messagebox as MBOX
 from dataclasses import dataclass, field
@@ -7,6 +8,7 @@ import logging
 logger = logging.getLogger( __name__ )
 
 # montague imports
+import utility as U
 import objects_interpreters as INT
 from objects_base import Object
 
@@ -31,7 +33,7 @@ class Application( Object ):
 
     _entry_text_selection : str = field( default_factory=str )
     _entry_command : str = field( default_factory=str )
-    _entry_script : str = field( default_factory=str )
+    _entry_script_name : str = field( default_factory=str )
     _memo_output : str = field( default_factory=str )
 
     # put pointer to current object in manager
@@ -39,8 +41,9 @@ class Application( Object ):
     _cli : object = field( default_factory=object )
 
     # script management
-    _current_script = "/scripts_montague/set_example.py"
-    _script_string : str = field( default_factory=str )
+    _script_path = ""
+    _script_name = ""
+    _script_buffer : str = field( default_factory=str )
 
     # --------------------------------
     # INIT
@@ -52,7 +55,9 @@ class Application( Object ):
         self._app_root = app_root
         self._obj_manager = obj_man
         self._interpreter = inter
-        self._script_string = 'print( "Hello, world!!!" )'
+        self._script_name = "default.py"
+        self._script_path = "./"
+        self._script_buffer = 'print( "Hello, world!!!" )'
 
         # --------------------------------
         # GUI
@@ -70,7 +75,7 @@ class Application( Object ):
         self._entry_text_selection = TK.StringVar()
         self._entry_text_selection.set( "This is a test." )
         self._app_root.update()
-        self._entry_text_selection = TTK.Entry( self._frame, width=25, textvariable=self._entry_text_selection )
+        self._entry_text_selection = TTK.Entry( self._frame, width=50, textvariable=self._entry_text_selection )
         self._entry_text_selection.grid( row=current_row, column=1, padx=5, pady=5, sticky=TK.W )
 
         # BUTTON: LIST OBJECTS
@@ -81,20 +86,23 @@ class Application( Object ):
         # ROW 1
         # --------
         current_row = 1
-        
 
         # BUTTON: LOAD SCRIPT
         self._button_load_script = TTK.Button( self._frame, text="Load script", command=self.click_button_load_script )
         self._button_load_script.grid( row=current_row, column=0, padx=5, pady=5, sticky=TK.W )
         
         # ENTRY TEXT: SCRIPT
-        self._entry_script = TK.StringVar()
-        self._entry_script = TTK.Entry( self._frame, width=25, textvariable=self._entry_script )
-        self._entry_script.grid( row=current_row, column=1, padx=5, pady=5, sticky=TK.W )
+        self._entry_script_name = TK.StringVar()
+        self._entry_script_name = TTK.Entry( self._frame, width=50, textvariable=self._entry_script_name )
+        self._entry_script_name.grid( row=current_row, column=1, padx=5, pady=5, sticky=TK.W )
 
         # BUTTON: EXECUTE SCRIPT
         self._button_exec_script = TTK.Button( self._frame, text="Execute script", command=self.click_button_exec_script )
         self._button_exec_script.grid( row=current_row, column=2, padx=5, pady=5, sticky=TK.W )
+
+        # BUTTON: SHOW SCRIPT
+        self._button_show_script = TTK.Button( self._frame, text="Show script", command=self.click_button_show_script )
+        self._button_show_script.grid( row=current_row, column=3, padx=5, pady=5, sticky=TK.W )
 
         # --------
         # ROW 2
@@ -106,7 +114,7 @@ class Application( Object ):
         
         # ENTRY TEXT: COMMAND
         self._entry_command = TK.StringVar()
-        self._entry_command = TTK.Entry( self._frame, width=25, textvariable=self._entry_command )
+        self._entry_command = TTK.Entry( self._frame, width=50, textvariable=self._entry_command )
         self._entry_command.grid( row=current_row, column=1, padx=5, pady=5, sticky=TK.W )
 
         # BUTTON: EXECUTE COMMAND
@@ -137,7 +145,7 @@ class Application( Object ):
 
         # MEMO: OUTPUT
         self._memo_output = TK.Text( self._app_root, height=20, width=100 )
-        self._memo_output.grid( row=current_row, column=0, columnspan=3, padx=5, pady=5, sticky=TK.W )
+        self._memo_output.grid( row=current_row, column=0, columnspan=4, padx=5, pady=5, sticky=TK.W )
 
         # Maybe make About button?
         #MBOX.showinfo( "Montague", "Montague Tool for Sentiment Analysis" )
@@ -162,20 +170,41 @@ class Application( Object ):
             MBOX.showwarning("Input Error", "There is no output to save.")
 
     def click_button_load_script( self ):
-        #MBOX.showwarning( "Loading script!", f"Loading script: {self._entry_script.get()}" )
         # pull from globals eventually; hardcoded for now
-        path_and_file = 'C:\\Users\\17082\\Documents\\github-repos\\montague\\' + self._entry_script.get()
-        logger.debug( f"location of file:{path_and_file=}" )
-        # redirect output to child window eventually
-        # add try-except
-        output = U.read_file_to_text( path_and_file )
-        logger.debug( f"size of file:{len(output)=}" )
-        self._memo_output.insert( TK.END, output ) 
+        self._script_name = self._entry_script_name.get()
+        self._script_path = 'C:\\Users\\17082\\Documents\\github-repos\\montague\\'
+        logger.debug( f"path:{self._script_path=} name:{self._entry_script_name}" )
+        
+        # Redirect output to child window eventually
+        success_flag, self._script_buffer = U.read_file_to_text( self._script_path + self._script_name )
+        logger.debug( f"{success_flag=} {self._script_buffer[:5]=}..." )
+        
+        # Advise the user of success or failure
+        if success_flag:
+            logger.debug( f"size of file:{len(self._script_buffer)=}" )
+            self._memo_output.insert( TK.END, f"Loaded '{self._script_path + self._script_name}'" ) 
+        else:
+            self._memo_output.insert( TK.END, f"{self._script_buffer}" ) 
 
     def click_button_exec_script( self ):
-        output = f"{self._entry_script.get()} executed"
         self._memo_output.delete( "1.0", "end" )
-        self._memo_output.insert( TK.END, output )
+        try:
+            # Redirect stdout to the StringIO object
+            exec_output = IO.StringIO()
+            old_stdout = SYS.stdout
+            SYS.stdout = exec_output
+            exec( self._script_buffer )
+            # Return to original stout
+            SYS.stdout = old_stdout
+            self._memo_output.insert( TK.END, exec_output.getvalue() )
+        except Exception as e:
+            logger.error( e )
+            self._memo_output.insert( TK.END, str( e ) )
+ 
+    def click_button_show_script( self ):
+        logger.debug( f"{self._script_name} shown" )
+        self._memo_output.delete( "1.0", "end" )
+        self._memo_output.insert( TK.END, self._script_buffer )
 
     def click_button_exec_command( self ):
         output = ""

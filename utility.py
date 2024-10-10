@@ -42,17 +42,25 @@ EXAMPLE
     print( text )
 """
 
-def read_file_to_text( path_and_filename: str ):
+"""
+from typing import Tuple
+def get_coordinates() -> Tuple[float, float]:
+    return 1.0, 2.0
+"""
+
+def read_file_to_text( path_and_filename: str ) -> str:
     log.debug( f"{path_and_filename=}" )
     #print( f"{path_and_filename=}" )
-    
-    text=""
+    success_flag = True
+    return_string = ""
     try:
         with open( path_and_filename ) as file:
-            text = file.read()
-    except:
-        log.error( f"Failed to read {path_and_filename}" )
-    return text
+            return_string = file.read()
+    except Exception as e:
+        log.error( e )
+        success_flag = False
+        return_string = str( e )
+    return success_flag, return_string
 
 # ----------------------------------------------------------------
 # GET_SUBSTRING
@@ -67,7 +75,7 @@ EXAMPLE:
     test_string = "'This is a test of the EBS' is a useful string."
     print( U.get_substring( test_string, "'", "'") + "." )
 """
-def get_substring( tmp_str, start_delim, end_delim ):
+def get_substring( tmp_str, start_delim, end_delim ) -> str:
     substr_start = tmp_str.find( start_delim  ) + len( start_delim ) # start and end delimitters can be arbitrary long substringthemselves
     substr_end = tmp_str.find( end_delim, substr_start)
     return tmp_str[ substr_start : substr_end ]
