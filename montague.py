@@ -130,13 +130,18 @@ class Application( Object ):
         self._button_save = TTK.Button( self._frame, text="Save output", command=self.click_button_save_output )
         self._button_save.grid( row=current_row, column=0, padx=5, pady=5, sticky=TK.W )
 
+        # ENTRY TEXT: SAVE FILENAME
+        self._entry_save_filename = TK.StringVar()
+        self._entry_save_filename = TTK.Entry( self._frame, width=50, textvariable=self._entry_save_filename )
+        self._entry_save_filename.grid( row=current_row, column=1, padx=5, pady=5, sticky=TK.W )
+
         # BUTTON: CLEAR OUTPUT
         self._button_clear = TTK.Button( self._frame, text="Clear output", command=self.click_button_clear_memo )
-        self._button_clear.grid( row=current_row, column=1, padx=5, pady=5, sticky=TK.W )
+        self._button_clear.grid( row=current_row, column=2, padx=5, pady=5, sticky=TK.W )
 
         # BUTTON: SHOW LOG
         self._button_show_log = TTK.Button( self._frame, text="Show log", command=self.click_button_show_log )
-        self._button_show_log.grid( row=current_row, column=2, padx=5, pady=5, sticky=TK.W )
+        self._button_show_log.grid( row=current_row, column=3, padx=5, pady=5, sticky=TK.W )
 
         # --------
         # ROW 4
@@ -157,28 +162,19 @@ class Application( Object ):
     # NB Don't forget to use .get() on text_entries
 
     def click_button_open_subroot( self ):
+        logger.info( "Called" )
         subroot = TK.Toplevel( self._app_root )
         subroot.title( "List Objects" )
 
-    def click_button_save_output( self ):
-        memo_content = self._memo_output.get("1.0", TK.END).strip()
-        if memo_content:
-            with open("output.txt", "w") as file:
-                file.write( memo_content )
-            MBOX.showinfo( "Success", "Output from script saved successfully!" )
-        else:
-            MBOX.showwarning("Input Error", "There is no output to save.")
-
     def click_button_load_script( self ):
+        logger.info( "Called" )
         # pull from globals eventually; hardcoded for now
         self._script_name = self._entry_script_name.get()
         self._script_path = 'C:\\Users\\17082\\Documents\\github-repos\\montague\\'
         logger.debug( f"path:{self._script_path=} name:{self._entry_script_name}" )
-        
         # Redirect output to child window eventually
         success_flag, self._script_buffer = U.read_file_to_text( self._script_path + self._script_name )
         logger.debug( f"{success_flag=} {self._script_buffer[:5]=}..." )
-        
         # Advise the user of success or failure
         if success_flag:
             logger.debug( f"size of file:{len(self._script_buffer)=}" )
@@ -187,6 +183,7 @@ class Application( Object ):
             self._memo_output.insert( TK.END, f"{self._script_buffer}" ) 
 
     def click_button_exec_script( self ):
+        logger.info( "Called" )
         self._memo_output.delete( "1.0", "end" )
         try:
             # Redirect stdout to the StringIO object
@@ -199,14 +196,17 @@ class Application( Object ):
             self._memo_output.insert( TK.END, exec_output.getvalue() )
         except Exception as e:
             logger.error( e )
+            self._memo_output.delete( "1.0", "end" )
             self._memo_output.insert( TK.END, str( e ) )
  
     def click_button_show_script( self ):
+        logger.info( "Called" )
         logger.debug( f"{self._script_name} shown" )
         self._memo_output.delete( "1.0", "end" )
         self._memo_output.insert( TK.END, self._script_buffer )
 
     def click_button_exec_command( self ):
+        logger.info( "Called" )
         output = ""
         self._memo_output.delete( "1.0", "end" )
         command = self._entry_command.get().strip()
@@ -214,25 +214,33 @@ class Application( Object ):
         self._memo_output.insert( TK.END, output)
 
     def click_button_save_output( self ):
-        memo_content = self._memo_output.get( "1.0", TK.END ).strip()
-        if memo_content:
-            with open("output.txt", "w") as file:
+        # REPLACE W UTILITY FUNCTION
+        logger.info( "Called" )
+        memo_content = self._memo_output.get("1.0", TK.END).strip()
+        filename = self._entry_save_filename.get()
+
+        logger.debug( f"Attempting to write {len(memo_content)} bytes to '{filename}'" )
+        if memo_content and filename:
+            with open( filename, "w") as file:
                 file.write( memo_content )
-            MBOX.showinfo("Success", "Output from script saved successfully!")
+            self._memo_output.delete( "1.0", "end" )
+            self._memo_output.insert( TK.END, "Output from script saved successfully!" )
         else:
-            MBOX.showwarning("Input Error", "There is no output to save.")
+            self._memo_output.delete( "1.0", "end" )
+            self._memo_output.insert( TK.END, "There is no output to save." )
 
     def click_button_show_log( self ):
+        logger.info( "Called" )
         # pull from globals eventually; hardcoded for now
         path_and_file = 'C:\\Users\\17082\\Documents\\github-repos\\montague\\montague.log'
-        logger.debug( f"location of file:{path_and_file=}" )
         # redirect output to child window eventually
-        # add try-except
+        # return success_flag and add 
         output = U.read_file_to_text( path_and_file )
-        logger.debug( f"size of file:{len(output)=}" )
+        self._memo_output.delete( "1.0", "end" )
         self._memo_output.insert( TK.END, output ) 
 
     def click_button_clear_memo( self ):
+        logger.info( "Called" )
         #self._memo_output.clipboard_get
         self._memo_output.delete( "1.0", "end" )
 
