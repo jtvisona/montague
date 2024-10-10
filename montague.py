@@ -139,8 +139,6 @@ class Application( Object ):
         self._memo_output = TK.Text( self._app_root, height=20, width=100 )
         self._memo_output.grid( row=current_row, column=0, columnspan=3, padx=5, pady=5, sticky=TK.W )
 
-
-
         # Maybe make About button?
         #MBOX.showinfo( "Montague", "Montague Tool for Sentiment Analysis" )
 
