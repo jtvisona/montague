@@ -9,8 +9,9 @@ logger = logging.getLogger( __name__ )
 
 # montague imports
 import utility as U
-import objects_interpreters as INT
 from objects_base import Object
+import object_manager as OM
+import objects_interpreters as INT
 
 # ----------------------------------------------------------------
 # APPLICATION
@@ -41,6 +42,7 @@ class Application( Object ):
     _cli : object = field( default_factory=object )
 
     # script management
+    # THIS STILL USED?
     _script_path = ""
     _script_name = ""
     _script_buffer : str = field( default_factory=str )
@@ -50,18 +52,18 @@ class Application( Object ):
     # --------------------------------
 
     def __init__( self, application_root="", object_manager="", interpreter="" ):
-        if application_root is None:
+        if not isinstance( application_root, TK.Tk ):
             logger.error( "No application root assigned to application" )
             raise Exception( "No application root assigned to application" )
-        if object_manager is None:
+        if not isinstance( object_manager, OM.ObjectManager ):
             logger.error( "No object manager assigned to application" )
             raise Exception( "No object manager assigned to application" )
-        if interpreter is None:
+        if not isinstance( interpreter, INT.Interpreter ):
             logger.error( "No interpreter assigned to application" )
             raise Exception( "No interpreter assigned to application" )
         
         #
-        #logger.debug( f"{application_root=} {object_manager=} {interpreter=}" )
+        logger.debug( f"application_root={type(application_root)} object_manager={type(object_manager)} interpeter={type(interpreter)}" )
 
         self._app_root = application_root
         self._obj_manager = object_manager
