@@ -50,6 +50,17 @@ class Application( Object ):
     # --------------------------------
 
     def __init__( self, application_root="", object_manager="", interpreter="" ):
+        if application_root is None:
+            logger.error( "No application root assigned to application" )
+            raise Exception( "No application root assigned to application" )
+        if object_manager is None:
+            logger.error( "No object manager assigned to application" )
+            raise Exception( "No object manager assigned to application" )
+        if interpreter is None:
+            logger.error( "No interpreter assigned to application" )
+            raise Exception( "No interpreter assigned to application" )
+        
+        #
         #logger.debug( f"{application_root=} {object_manager=} {interpreter=}" )
 
         self._app_root = application_root
