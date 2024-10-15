@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 import logging
+from objects_base import Object
 import object_manager as OM
 logger = logging.getLogger( __name__ )
 
 @dataclass
-class Interpreter:
+class Interpreter( Object ):
 
     _history : list = field( default_factory=list )
     _object_manager : object = field( default_factory=object )
