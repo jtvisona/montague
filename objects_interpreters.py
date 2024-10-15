@@ -27,7 +27,7 @@ class Interpreter:
 
     def process_command( self, command: str ) -> str :
         logger.debug( "Called" )
-        logger.info( f"Appending '{command}' to history" )
+        logger.info( f"Appending command '{command}' to interpreter history" )
         self._history.append( command )
 
         output = ""

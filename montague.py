@@ -42,7 +42,7 @@ class Application( Object ):
     _cli : object = field( default_factory=object )
 
     # script management
-    # THIS STILL USED?
+    # CONVERT TO SCRIPT OBJECT
     _script_path = ""
     _script_name = ""
     _script_buffer : str = field( default_factory=str )
@@ -52,6 +52,7 @@ class Application( Object ):
     # --------------------------------
 
     def __init__( self, application_root="", object_manager="", interpreter="" ):
+        # error check correct object classes
         if not isinstance( application_root, TK.Tk ):
             logger.error( "No application root assigned to application" )
             raise Exception( "No application root assigned to application" )
@@ -61,8 +62,7 @@ class Application( Object ):
         if not isinstance( interpreter, INT.Interpreter ):
             logger.error( "No interpreter assigned to application" )
             raise Exception( "No interpreter assigned to application" )
-        
-        #
+        # pass error check so log
         logger.debug( f"application_root={type(application_root)} object_manager={type(object_manager)} interpeter={type(interpreter)}" )
 
         self._app_root = application_root
