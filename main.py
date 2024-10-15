@@ -44,14 +44,15 @@ def main():
     app_root.title( G_MAIN["APP_ROOT_TITLE"] ) 
     app_root.geometry( G_MAIN["APP_ROOT_DIMENSIONS"] )
 
-    log.info( "Creating object manager" )
-    obj_man = OM.ObjectManager()
-
+    # Create the interpreter and link the object manager before passing both to the application
     log.info( "Creating interpreter" )
     inter = INT.Interpreter()
 
+    log.info( "Creating object manager" )
+    obj_man = OM.ObjectManager( name="Main Object Manager", interpreter=inter )
+
     log.info( "Creating Montague application and assigning object manager and interpreter" )
-    mgue = MGUE.Application( app_root, obj_man, inter )
+    mgue = MGUE.Application( application_root=app_root, object_manager=obj_man, interpreter=inter )
 
     log.info( "Invoking the Montague mainloop" )
     app_root.mainloop()

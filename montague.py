@@ -49,12 +49,12 @@ class Application( Object ):
     # INIT
     # --------------------------------
 
-    def __init__( self, app_root, obj_man, inter ):
-        logger.debug( f"{app_root=} {obj_man=}" )
+    def __init__( self, application_root="", object_manager="", interpreter="" ):
+        #logger.debug( f"{application_root=} {object_manager=} {interpreter=}" )
 
-        self._app_root = app_root
-        self._obj_manager = obj_man
-        self._interpreter = inter
+        self._app_root = application_root
+        self._obj_manager = object_manager
+        self._interpreter = interpreter
         self._script_name = "default.py"
         self._script_path = "./"
         self._script_buffer = 'print( "Hello, world!!!" )'

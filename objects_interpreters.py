@@ -1,11 +1,13 @@
 from dataclasses import dataclass, field
 import logging
+import object_manager as OM
 logger = logging.getLogger( __name__ )
 
 @dataclass
 class Interpreter:
 
     _history : list = field( default_factory=list )
+    _object_manager : object = field( default_factory=object )
 
     def __init__( self ):
         logger.info( "Called" )
@@ -32,6 +34,9 @@ class Interpreter:
         logger.info( "Checking for valid command" )
         if command == "test":
             output = "testing complete"
+        elif command == "list object":
+            #output = str( self._object_manager.object_list() )
+            output = "list object"
         elif command == "clear history":
             self.clear_history()
         elif command == "show history":
@@ -61,3 +66,8 @@ class Interpreter:
             logger.exception( "Failed to clear history" )
             success_flag = False
         return success_flag
+    
+    def link_to_manager( self, object_manager ) -> None :
+        logger.debug( "Called" )
+        self._object_manager = object_manager
+        logger.info( f"Object manager {object_manager.name} linked" )
