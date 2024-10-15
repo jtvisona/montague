@@ -10,7 +10,7 @@ class Interpreter:
     _object_manager : object = field( default_factory=object )
 
     def __init__( self ):
-        logger.info( "Called" )
+        logger.debug( "Called" )
         self._history = []
 
     @property

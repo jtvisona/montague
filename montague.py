@@ -52,16 +52,16 @@ class Application( Object ):
     # --------------------------------
 
     def __init__( self, application_root="", object_manager="", interpreter="" ):
+        logger.debug( "Called " )
         # error check correct object classes
         if not isinstance( application_root, TK.Tk ):
-            logger.error( "No application root assigned to application" )
-            raise Exception( "No application root assigned to application" )
+            message = "No application root assigned to Application"
+            logger.error( message ); raise Exception( message )
         if not isinstance( object_manager, OM.ObjectManager ):
-            logger.error( "No object manager assigned to application" )
-            raise Exception( "No object manager assigned to application" )
+            message = "No object manager assigned to Application"
+            logger.error( message ); raise Exception( message )
         if not isinstance( interpreter, INT.Interpreter ):
-            logger.error( "No interpreter assigned to application" )
-            raise Exception( "No interpreter assigned to application" )
+            message = "No interpreter assigned to Application"
         # pass error check so log
         logger.debug( f"application_root={type(application_root)} object_manager={type(object_manager)} interpeter={type(interpreter)}" )
 

@@ -9,6 +9,7 @@ logger = logging.getLogger( __name__ )
 
 # Montague imports
 from objects_base import Object
+import objects_interpreters as INT
 import objects_adt as ADT
 import objects_base as BASE
 import objects_function as FUN
@@ -25,11 +26,18 @@ Keeps track of metadata about all objects that have been instanticated
 
 @dataclass
 class ObjectManager( Object ):
+
     _object_list : dict = field( default_factory=dict )
     _linked_interpreter : object = field( default_factory=object )
 
     def __init__( self, name="", interpreter="" ):
         logger.debug( "Called " )
+        if not isinstance( interpreter, INT.int ):
+            message = "No interpreter to ObjectManager"
+            logger.error( message ); raise Exception( message )
+        # pass error check so log
+        logger.debug( f"application_root={type(application_root)} object_manager={type(object_manager)} interpeter={type(interpreter)}" )
+
         self._object_list = []
         logger.info( "Assigning intepreter to object manager" )
         self._linked_interpreter = interpreter
