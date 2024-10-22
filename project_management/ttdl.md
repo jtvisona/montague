@@ -18,6 +18,7 @@
 - [ ] Specify all return types (type hints)
 - [ ] Add if G.debug: to all methods
 - [ ] Ensure all objects are derived from Object
+- [ ] Figure out how to use 'pip freeze' to reduce online git repo
 
 ### GUI
 - [ ] Can abstract window object to have multiple roots running
