@@ -1,6 +1,7 @@
 lab/*
 data/*
 tests/*
+scripts_sentiment/*
 montague.log
 output.txt
 
