@@ -1,7 +1,10 @@
 lab/*
 data/*
+project_management/*
 tests/*
 scripts_kaggle/*
 montague.log
 output.txt
+.venv/*
+
 
